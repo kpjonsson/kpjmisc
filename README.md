@@ -1,0 +1,2 @@
+# kpjmisc
+Miscellaneous R functions
