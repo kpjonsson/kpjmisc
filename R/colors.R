@@ -21,6 +21,6 @@ many_colors = function(n) {
 }
 
 arsenal_colors = function(n) {
-    if (n > 3) print('Only three colors in palette.')
+    if (n > 3) stop('Only three colors in palette.')
     c('#EF0107','#023474','#9C824A')[1:n]
 }
