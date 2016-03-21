@@ -21,7 +21,8 @@ plot_stratton = function(
     nt_comp = list('G'='C', 'A'='T', 'C'='G', 'T'='A')
 
     ### Load MAF if path provided
-    if (is.character(maf)) maf = fread(maf)
+    if (is.character(maf)) { maf = fread(maf)
+    } else { maf = tbl_df(maf) }
 
     ### Process MAF
     if (is.null(sample_name)) sample_name = unique(maf$Tumor_Sample_Barcode)
@@ -33,6 +34,7 @@ plot_stratton = function(
         filter(str_sub(TriNuc_Context,2,2) != str_sub(TriNuc_Context,3,3)) %>%
         group_by(Tumor_Sample_Barcode, TriNuc_Context) %>%
         summarize(TriNuc_Count = n()) %>%
+        tidyr::complete(Tumor_Sample_Barcode, TriNuc_Context = trinuc_context, fill = list(TriNuc_Count = 0)) %>%
         mutate(TriNuc_Frac = TriNuc_Count/sum(TriNuc_Count)) %>%
         mutate(TriNuc_Context = factor(TriNuc_Context, levels = trinuc_context, ordered = T)) %>%
         mutate(Transition = paste0(str_sub(TriNuc_Context,2,2),'>',str_sub(TriNuc_Context,3,3)))
