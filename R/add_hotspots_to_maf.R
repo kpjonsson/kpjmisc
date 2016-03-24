@@ -6,8 +6,8 @@
 
 add_hotspots_to_maf = function(maf) {
     data(hotspots)
-    maf = merge(maf, hotspots, by = c('Hugo_Symbol', 'HGVSp_Short'), all.x = TRUE)
     if ('Hotspot' %in% names(maf)) stop('Hotspot column already in MAF.')
+    maf = merge(maf, hotspots, by = c('Hugo_Symbol', 'HGVSp_Short'), all.x = TRUE)
     maf$Hotspot[is.na(maf$Hotspot)] = FALSE
     maf
 }

@@ -43,15 +43,16 @@ plot_stratton = function(
     out_plot = ggplot(trinuc_maf, aes(TriNuc_Context, TriNuc_Frac, fill = Transition)) +
         geom_bar(stat = 'identity') +
         theme(text = element_text(family = 'Helvetica', size = 8), axis.text = element_text(color = 'black'),
-              axis.ticks.x = element_blank(), axis.text.x = element_text(angle = 90, vjust = .5, hjust = 0, size = 2),
+              axis.ticks.x = element_blank(), axis.text.x = element_text(angle = 90, vjust = .5, hjust = 0, size = 4),
               panel.background = element_blank(), legend.key = element_rect(color = 'white'),
               legend.title = element_blank(), legend.key.size = unit(.25, 'cm'), panel.grid = element_blank(),
-              strip.background = element_blank(), strip.text = element_text(size = 10), axis.ticks = element_blank()) +
+              strip.background = element_blank(), strip.text = element_text(size = 10),
+              axis.line = element_line(color = 'black', size = .5)) +
         labs(x = '', y = 'Fraction') +
         scale_x_discrete(labels = paste0(str_sub(levels(trinuc_maf$TriNuc_Context),1,2), str_sub(levels(trinuc_maf$TriNuc_Context),4,4))) +
         scale_fill_manual(values = c("#1EBFF0", "#050708", "#E62725", "#CBCACB", "#A1CF64", "#EDC8C5")) +
         scale_y_continuous(labels = scales::percent, breaks = seq(0, max(as.numeric(trinuc_maf$TriNuc_Frac)), .05), expand = c(0,0)) +
-        geom_hline(yintercept = seq(0, max(as.numeric(trinuc_maf$TriNuc_Frac)), .05), col = 'darkgrey', size = .25, alpha = .5)
+        geom_hline(yintercept = seq(0, max(as.numeric(trinuc_maf$TriNuc_Frac)), .05), col = 'white', size = .5, alpha = .5)
 
     ### Facets if more than one sample
     if (length(sample_name) > 1) out_plot = out_plot + facet_wrap(~Tumor_Sample_Barcode)
