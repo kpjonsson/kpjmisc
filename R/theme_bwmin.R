@@ -3,7 +3,7 @@
 #' Use by adding \code{+theme_bwmin()} to your ggplot call.
 
 theme_bwmin = function(
-    base_size = 10,
+    base_size = 12,
     base_family = 'Helvetica',
     ticks = TRUE)
 {
