@@ -4,7 +4,7 @@
 \alias{theme_bwmin}
 \title{Black-and-white minimalistic theme for ggplot2}
 \usage{
-theme_bwmin(base_size = 10, base_family = "Helvetica", ticks = TRUE)
+theme_bwmin(base_size = 12, base_family = "Helvetica", ticks = TRUE)
 }
 \description{
 Use by adding \code{+theme_bwmin()} to your ggplot call.
