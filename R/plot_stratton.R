@@ -35,6 +35,7 @@ plot_stratton = function(
         group_by(Tumor_Sample_Barcode, TriNuc_Context) %>%
         summarize(TriNuc_Count = n()) %>%
         tidyr::complete(Tumor_Sample_Barcode, TriNuc_Context = trinuc_context, fill = list(TriNuc_Count = 0)) %>%
+        group_by(Tumor_Sample_Barcode) %>%
         mutate(TriNuc_Frac = TriNuc_Count/sum(TriNuc_Count)) %>%
         mutate(TriNuc_Context = factor(TriNuc_Context, levels = trinuc_context, ordered = T)) %>%
         mutate(Transition = paste0(str_sub(TriNuc_Context,2,2),'>',str_sub(TriNuc_Context,3,3)))
@@ -42,7 +43,7 @@ plot_stratton = function(
     ### Plot
     out_plot = ggplot(trinuc_maf, aes(TriNuc_Context, TriNuc_Frac, fill = Transition)) +
         geom_bar(stat = 'identity') +
-        theme(text = element_text(family = 'Helvetica', size = 8), axis.text = element_text(color = 'black'),
+        theme(text = element_text(family = 'Helvetica', size = 12), axis.text = element_text(color = 'black'),
               axis.ticks.x = element_blank(), axis.text.x = element_text(angle = 90, vjust = .5, hjust = 0, size = 4),
               panel.background = element_blank(), legend.key = element_rect(color = 'white'),
               legend.title = element_blank(), legend.key.size = unit(.25, 'cm'), panel.grid = element_blank(),
@@ -51,11 +52,11 @@ plot_stratton = function(
         labs(x = '', y = 'Fraction') +
         scale_x_discrete(labels = paste0(str_sub(levels(trinuc_maf$TriNuc_Context),1,2), str_sub(levels(trinuc_maf$TriNuc_Context),4,4))) +
         scale_fill_manual(values = c("#1EBFF0", "#050708", "#E62725", "#CBCACB", "#A1CF64", "#EDC8C5")) +
-        scale_y_continuous(labels = scales::percent, breaks = seq(0, max(as.numeric(trinuc_maf$TriNuc_Frac)), .05), expand = c(0,0)) +
+        scale_y_continuous(labels = scales::percent) +
         geom_hline(yintercept = seq(0, max(as.numeric(trinuc_maf$TriNuc_Frac)), .05), col = 'white', size = .5, alpha = .5)
 
     ### Facets if more than one sample
-    if (length(sample_name) > 1) out_plot = out_plot + facet_wrap(~Tumor_Sample_Barcode)
+    if (length(sample_name) > 1) out_plot = out_plot + facet_wrap(~Tumor_Sample_Barcode, drop = T)
 
     ### Print
     print(out_plot)

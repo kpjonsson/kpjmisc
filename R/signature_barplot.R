@@ -16,6 +16,7 @@ signature_barplot = function(
 
     if (is.null(col_vec)) {
 
+        grey_pal = colorRampPalette(RColorBrewer::brewer.pal(9, 'Greys'))(16)
         col_vec = c("#e41a1c","#377eb8","#4daf4a","#984ea3",grey_pal[2],"#ff7f00","#ffff33",grey_pal[3],"#a65628",
                     "#f781bf","#b2df8a",grey_pal[4],"#377eb8",grey_pal[5],"#ff7f00",grey_pal[6:9],"#ff7f00",
                     grey_pal[10],"#cab2d6",grey_pal[11:13],"#ff7f00",grey_pal[14:15],"#984ea3",grey_pal[16])
@@ -26,7 +27,6 @@ signature_barplot = function(
                                                    '16','17','18','19','MMR','21','Aristolochic acid','23','Aflatoxin','25','MMR','27','28','Chewing tobacco','30'))) %>%
             mutate(variable = factor(variable, levels = c('Age','APOBEC','BRCA','Smoking','MMR','UV','POLN','POLE','TMZ','Aristolochic acid','Aflatoxin','Chewing tobacco',
                                                           '5','8','12','14','16','17','18','19','21','23','25','27','28','30'), ordered = T))
-        grey_pal = colorRampPalette(RColorBrewer::brewer.pal(9, 'Greys'))(16)
         col_vec = c('#6baed6','#d0d1e6','#ef3b2c','#a50f15','#df65b0','#fec44f','#dadaeb','#fdbf6f','#a2d399','#f7fcb9','#fdd0a2','#cb181d', grey_pal[1:14])
     }
 

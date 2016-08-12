@@ -5,9 +5,9 @@
 # write.table(hotspots, file = 'data/hotspots.txt', col.names = T, row.names = F, sep = '\t', quote = F)
 
 ### Also add coding mutations
-coding_mutations = c('Frame_Shift_Del', 'Frame_Shift_Ins', 'In_Frame_Del', 'In_Frame_Ins', 'Missense_Mutation',
-                     'Nonsense_Mutation', 'Nonstop_Mutation', 'Splice_Site')
-save(coding_mutations, file = 'data/coding_mutations.rda')
+# coding_mutations = c('Frame_Shift_Del', 'Frame_Shift_Ins', 'In_Frame_Del', 'In_Frame_Ins', 'Missense_Mutation',
+#                      'Nonsense_Mutation', 'Nonstop_Mutation', 'Splice_Site', 'Splice_Region', 'Targeted_Region')
+# save(coding_mutations, file = 'data/coding_mutations.rda')
 
 add_hotspots_to_maf = function(maf) {
     data(hotspots)
