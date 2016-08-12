@@ -9,8 +9,8 @@
 #                      'Nonsense_Mutation', 'Nonstop_Mutation', 'Splice_Site', 'Splice_Region', 'Targeted_Region')
 # save(coding_mutations, file = 'data/coding_mutations.rda')
 
-add_hotspots_to_maf = function(maf) {
-    data(hotspots)
+add_hotspots_to_maf = function(maf, hotspots = NULL) {
+    if (is.null(hotspots)) data(hotspots)
     if ('Hotspot' %in% names(maf)) stop('Hotspot column already in MAF.')
     maf = merge(maf, hotspots, by = c('Hugo_Symbol', 'HGVSp_Short'), all.x = TRUE)
     maf$Hotspot[is.na(maf$Hotspot)] = FALSE
