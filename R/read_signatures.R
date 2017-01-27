@@ -18,13 +18,16 @@ read_signatures = function(input_file, signature_order = NULL) {
     sign = fread(input_file) %>%
         melt(id.vars = c('Sample Name', 'Number of Mutations')) %>%
         mutate(variable = str_replace(variable, 'Signature.', ''),
-               variable = mapvalues(variable, seq(1,30), signatures_map))
+               variable = mapvalues(variable, seq(1,30), signatures_map)) %>%
+        rename(sample = `Sample Name`, mutation_count = `Number of Mutations`,
+               signature = variable, fraction = value)
 
     if (is.null(signature_order)) {
-        sign = mutate(sign, variable = factor(variable, custom_order, ordered = T))
+        sign = mutate(sign, signature = factor(signature, custom_order, ordered = T))
         sign
     } else {
-        sign = mutate(sign, variable = factor(variable, signature_order, ordered = T))
+        sign = mutate(sign, signature = factor(signature, signature_order, ordered = T))
+        sign
     }
 
 }
