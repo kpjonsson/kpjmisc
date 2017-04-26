@@ -1,33 +1,33 @@
 ### See http://cancer.sanger.ac.uk/cosmic/signatures
 signatures_map = c('Age','APOBEC','BRCA','Smoking','5',
-                   'MMR','UV','8','POLN','POLE',
-                   'TMZ','12','APOBEC','14','MMR',
-                   '16','17','18','19','MMR',
-                   'MMR-like','Aristolochic acid','23','Aflatoxin','25',
-                   'MMR','27','28','Chewing tobacco','30')
+                   'MMR/MSI','UV','8','POLN','POLE',
+                   'TMZ','12','APOBEC','14','MMR/MSI',
+                   '16','17','18','19','MMR/MSI',
+                   'MMR/MSI','Aristolochic acid','23','Aflatoxin','25',
+                   'MMR/MSI','27','28','Chewing tobacco','30')
 
-custom_order = c('Age','APOBEC','BRCA','Smoking','MMR',
-                 'MMR-like','UV','POLN','POLE','TMZ',
+custom_order = c('Age','APOBEC','BRCA','Smoking','MMR/MSI',
+                 'MMR/MSI','UV','POLN','POLE','TMZ',
                  'Aristolochic acid','Aflatoxin','Chewing tobacco',
                  '5','8','12','14','16',
                  '17','18','19','23','25',
                  '27','28','30')
 
-read_signatures = function(input_file, signature_order = NULL) {
+read_signatures = function(input_file) {
 
     sign = fread(input_file) %>%
         melt(id.vars = c('Sample Name', 'Number of Mutations')) %>%
         mutate(variable = str_replace(variable, 'Signature.', ''),
-               variable = mapvalues(variable, seq(1,30), signatures_map)) %>%
+               variable_name = mapvalues(variable, seq(1,30), signatures_map)) %>%
         rename(sample = `Sample Name`, mutation_count = `Number of Mutations`,
-               signature = variable, fraction = value)
+               signature = variable, signature_name = variable_name, fraction = value)
 
-    if (is.null(signature_order)) {
-        sign = mutate(sign, signature = factor(signature, custom_order, ordered = T))
-        sign
-    } else {
-        sign = mutate(sign, signature = factor(signature, signature_order, ordered = T))
-        sign
-    }
+    # if (is.null(signature_order)) {
+    #     sign = mutate(sign, signature = factor(signature, custom_order, ordered = T))
+    #     sign
+    # } else {
+    #     sign = mutate(sign, signature = factor(signature, signature_order, ordered = T))
+    #     sign
+    # }
 
 }
