@@ -1,7 +1,7 @@
 ### See http://cancer.sanger.ac.uk/cosmic/signatures
 signatures_map = c('Age','APOBEC','BRCA','Smoking','5',
                    'MMR/MSI','UV','8','POLN','POLE',
-                   'TMZ','12','APOBEC','14','MMR/MSI',
+                   'TMZ','12','APOBEC','MMR/MSI','MMR/MSI',
                    '16','17','18','19','MMR/MSI',
                    'MMR/MSI','Aristolochic acid','23','Aflatoxin','25',
                    'MMR/MSI','27','28','Chewing tobacco','30')
@@ -9,7 +9,7 @@ signatures_map = c('Age','APOBEC','BRCA','Smoking','5',
 custom_order = c('Age','APOBEC','BRCA','Smoking','MMR/MSI',
                  'MMR/MSI','UV','POLN','POLE','TMZ',
                  'Aristolochic acid','Aflatoxin','Chewing tobacco',
-                 '5','8','12','14','16',
+                 '5','8','12','16',
                  '17','18','19','23','25',
                  '27','28','30')
 
