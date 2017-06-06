@@ -2,12 +2,14 @@
 #'
 #' Use by adding \code{+theme_bwmin()} to your ggplot call.
 
+library(ggplot2)
+
 theme_bwmin = function(
     base_size = 12,
     base_family = 'Helvetica',
     ticks = TRUE)
 {
-  ret = ggplot2::theme_bw(base_size = base_size, base_family = base_family) +
+  ret = theme_bw(base_size = base_size, base_family = base_family) +
     theme(
         plot.background = element_blank(),
         panel.grid.major = element_blank(),

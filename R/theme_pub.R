@@ -1,3 +1,9 @@
+#' Minimalistic ggplot2 theme with font and line sizes for publication
+#'
+#' Use by adding \code{+theme_bwmin()} to your ggplot call.
+
+library(ggplot2)
+
 theme_pub = theme_bwmin() +
     theme(text = element_text(family = 'Helvetica', size = 6),
           axis.text = element_text(family = 'Helvetica', size = 6, color = 'black'),
