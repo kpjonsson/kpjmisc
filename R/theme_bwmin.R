@@ -7,7 +7,7 @@ theme_bwmin = function(
     base_family = 'Helvetica',
     ticks = TRUE)
 {
-  ret = theme_bw(base_size = base_size, base_family = base_family) +
+  ret = ggplot2::theme_bw(base_size = base_size, base_family = base_family) +
     theme(
         plot.background = element_blank(),
         panel.grid.major = element_blank(),
