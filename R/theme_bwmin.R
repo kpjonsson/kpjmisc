@@ -20,7 +20,8 @@ theme_bwmin = function(
         legend.key = element_blank(),
         legend.key.size = unit(.25, "cm"),
         panel.border = element_rect(fill = NA, colour = 'black', size = 0.5),
-        axis.ticks = element_line(size = 0.5)
+        axis.ticks = element_line(size = 0.5),
+        panel.background = element_blank()
         )
   if (!ticks) ret = ret + theme(axis.ticks = element_blank())
   ret
