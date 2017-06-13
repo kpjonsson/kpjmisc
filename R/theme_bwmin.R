@@ -15,9 +15,9 @@ theme_bwmin = theme_bw() +
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_blank(),
-        axis.ticks = element_line(size = 0.5),
-        axis.line.y = element_line(size = .5, color = 'black', linetype = 'solid'),
-        axis.line.x = element_line(size = .5, color = 'black', linetype = 'solid')
+        axis.ticks = element_line(size = 0.5, lineend = 'round'),
+        axis.line.y = element_line(size = .5, color = 'black', linetype = 'solid', lineend = 'round'),
+        axis.line.x = element_line(size = .5, color = 'black', linetype = 'solid', lineend = 'round')
     )
 
 # theme_bwmin = function(
