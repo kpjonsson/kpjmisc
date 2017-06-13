@@ -6,15 +6,15 @@ library(ggplot2)
 
 theme_bwmin = theme_bw() +
     theme(
-        text = element_text(family = 'Helvetica', size = 12),
-        plot.background = element_blank(),
+        text = element_text(family = 'Helvetica', size = 12, color = 'black'),
+        plot.background = element_rect(fill = NA),
         strip.background = element_blank(),
         legend.background = element_blank(),
         legend.key = element_blank(),
         legend.key.size = unit(.25, "cm"),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
-        panel.border = element_blank(),
+        panel.border = element_rect(fill = NA),
         axis.ticks = element_line(size = 0.5, lineend = 'round'),
         axis.line.y = element_line(size = .5, color = 'black', linetype = 'solid', lineend = 'round'),
         axis.line.x = element_line(size = .5, color = 'black', linetype = 'solid', lineend = 'round')
