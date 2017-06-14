@@ -11,7 +11,7 @@ theme_bwmin = theme_bw() +
         strip.background = element_blank(),
         legend.background = element_blank(),
         legend.key = element_blank(),
-        legend.key.size = unit(.25, "cm"),
+        legend.key.size = unit(.75, 'lines'),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.border = element_rect(fill = NA),
