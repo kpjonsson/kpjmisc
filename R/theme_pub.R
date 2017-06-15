@@ -6,8 +6,8 @@ library(ggplot2)
 
 theme_pub = theme_bw() +
     theme(
-        text = element_text(family = 'Arial', size = 6),
-        axis.text = element_text(family = 'Arial', size = 6, color = 'black'),
+        text = element_text(family = 'ArialMT', size = 6),
+        axis.text = element_text(family = 'ArialMT', size = 6, color = 'black'),
         line = element_line(size = .25, lineend = 'round'),
         plot.background = element_blank(),
         panel.grid.major = element_blank(),
