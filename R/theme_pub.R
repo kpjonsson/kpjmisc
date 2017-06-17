@@ -4,11 +4,22 @@
 
 library(ggplot2)
 
-theme_pub = theme_bwmin() +
-    theme(text = element_text(family = 'Helvetica', size = 6),
-          axis.text = element_text(family = 'Helvetica', size = 6, color = 'black'),
-          line = element_line(size = .25, lineend = 'round'),
-          panel.border = element_blank(),
-          axis.line = element_line(color = 'black', size = .25),
-          axis.ticks = element_line(size = .25),
-          legend.title = element_text(face = 'bold'))
+theme_pub = theme_bw() +
+    theme(
+        text = element_text(family = 'ArialMT', size = 6),
+        axis.text = element_text(family = 'ArialMT', size = 6, color = 'black'),
+        line = element_line(size = .25, lineend = 'round'),
+        plot.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        strip.background = element_blank(),
+        panel.border = element_blank(),
+        axis.line.x = element_line(color = 'black', size = .25),
+        axis.line.y = element_line(color = 'black', size = .25),
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        legend.key.size = unit(.25, "cm"),
+        axis.ticks = element_line(size = .25),
+        legend.title = element_text(face = 'bold'),
+        panel.background = element_blank()
+    )
