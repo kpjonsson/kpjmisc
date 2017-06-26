@@ -17,9 +17,9 @@ read_signatures = function(input_file) {
 
     sign = fread(input_file) %>%
         melt(id.vars = c('Sample Name', 'Number of Mutations')) %>%
-        mutate(variable = str_replace(variable, 'Signature.', ''),
-               variable_name = mapvalues(variable, seq(1,30), signatures_map)) %>%
-        rename(sample = `Sample Name`, mutation_count = `Number of Mutations`,
+        dplyr::mutate(variable = str_replace(variable, 'Signature.', ''),
+               variable_name = dplyr::mapvalues(variable, seq(1,30), signatures_map)) %>%
+        dplyr::rename(sample = `Sample Name`, mutation_count = `Number of Mutations`,
                signature = variable, signature_name = variable_name, fraction = value)
 
     # if (is.null(signature_order)) {
