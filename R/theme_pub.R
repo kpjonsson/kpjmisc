@@ -16,13 +16,13 @@ theme_pub = theme_bw() +
         panel.grid.minor.y = element_blank(),
         strip.background = element_blank(),
         panel.border = element_blank(),
-        axis.line.x = element_line(color = 'black', size = 0.1976),
-        axis.line.y = element_line(color = 'black', size = 0.1976),
+        axis.line.x = element_line(color = 'black', size = .75),
+        axis.line.y = element_line(color = 'black', size = .75),
         axis.ticks.length = unit(2, 'pt'),
         legend.background = element_blank(),
         legend.key = element_blank(),
         legend.key.size = unit(.25, "cm"),
-        axis.ticks = element_line(color = 'black', size = 0.1976),
+        axis.ticks = element_line(color = 'black', size = .75),
         legend.title = element_text(face = 'bold'),
         panel.background = element_blank()
     )
