@@ -6,7 +6,7 @@ library(ggplot2)
 
 theme_bwmin = theme_bw() +
     theme(
-        text = element_text(family = 'Arial', size = 10, color = 'black'),
+        text = element_text(family = 'ArialMT', size = 10, color = 'black'),
         plot.background = element_rect(fill = NA),
         strip.background = element_blank(),
         legend.background = element_blank(),
