@@ -19,6 +19,7 @@ theme_bwmin = theme_bw() +
         axis.ticks = element_line(color = 'black', size = .75, lineend = 'round'),
         axis.ticks.length = unit(2, 'pt'),
         panel.border = element_blank(),
+        panel.background = element_blank(),
         plot.background = element_blank(),
     )
 
