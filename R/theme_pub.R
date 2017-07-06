@@ -24,5 +24,6 @@ theme_pub = theme_bw() +
         legend.key.size = unit(.25, "cm"),
         axis.ticks = element_line(color = 'black', size = .75*0.352777778, lineend = 'round'),
         legend.title = element_text(face = 'bold'),
-        panel.background = element_blank()
+        panel.background = element_blank(),
+        plot.margin = unit(c(0.25,0.5,0.25,0.25), 'lines')
     )
