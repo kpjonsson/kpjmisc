@@ -13,10 +13,11 @@ theme_bwmin = theme_bw() +
         legend.key.size = unit(.75, 'lines'),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
-        axis.ticks = element_line(size = 0.5, lineend = 'round'),
         axis.text = element_text(color = 'black'),
         axis.line.y = element_line(size = .75, color = 'black', linetype = 'solid', lineend = 'round'),
         axis.line.x = element_line(size = .75, color = 'black', linetype = 'solid', lineend = 'round'),
+        axis.ticks = element_line(color = 'black', size = .75, lineend = 'round'),
+        axis.ticks.length = unit(2, 'pt'),
         panel.border = element_blank(),
         plot.background = element_blank(),
     )
