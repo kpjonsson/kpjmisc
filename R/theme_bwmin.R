@@ -21,6 +21,7 @@ theme_bwmin = theme_bw() +
         panel.border = element_blank(),
         panel.background = element_blank(),
         plot.background = element_blank(),
+        plot.margin = unit(c(0.25,0.5,0.25,0.25), 'lines')
     )
 
 # theme_bwmin = function(
