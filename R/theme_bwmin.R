@@ -6,7 +6,7 @@ library(ggplot2)
 
 theme_bwmin = theme_bw() +
     theme(
-        text = element_text(family = 'Helvetica', size = 10, color = 'black'),
+        text = element_text(family = 'Arial', size = 10, color = 'black'),
         plot.background = element_rect(fill = NA),
         strip.background = element_blank(),
         legend.background = element_blank(),
@@ -18,7 +18,8 @@ theme_bwmin = theme_bw() +
         axis.ticks = element_line(size = 0.5, lineend = 'round'),
         axis.text = element_text(color = 'black'),
         axis.line.y = element_line(size = .75, color = 'black', linetype = 'solid', lineend = 'round'),
-        axis.line.x = element_line(size = .75, color = 'black', linetype = 'solid', lineend = 'round')
+        axis.line.x = element_line(size = .75, color = 'black', linetype = 'solid', lineend = 'round'),
+        panel.border = element_blank(),
     )
 
 # theme_bwmin = function(
