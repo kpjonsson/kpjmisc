@@ -14,7 +14,6 @@ theme_bwmin = theme_bw() +
         legend.key.size = unit(.75, 'lines'),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
-        axis.text = element_text(color = 'black'),
         axis.line.y = element_line(size = .75, color = 'black', linetype = 'solid', lineend = 'round'),
         axis.line.x = element_line(size = .75, color = 'black', linetype = 'solid', lineend = 'round'),
         axis.ticks.y = element_line(color = 'black', size = .75, lineend = 'round'),
