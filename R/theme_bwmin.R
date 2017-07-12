@@ -6,7 +6,8 @@ library(ggplot2)
 
 theme_bwmin = theme_bw() +
     theme(
-        text = element_text(family = 'ArialMT', size = 10, color = 'black'),
+        text = element_text(family = 'ArialMT', size = 12, color = 'black'),
+        axis.text = element_text(family = 'ArialMT', size = 12, color = 'black'),
         strip.background = element_blank(),
         legend.background = element_blank(),
         legend.key = element_blank(),
@@ -16,7 +17,8 @@ theme_bwmin = theme_bw() +
         axis.text = element_text(color = 'black'),
         axis.line.y = element_line(size = .75, color = 'black', linetype = 'solid', lineend = 'round'),
         axis.line.x = element_line(size = .75, color = 'black', linetype = 'solid', lineend = 'round'),
-        axis.ticks = element_line(color = 'black', size = .75, lineend = 'round'),
+        axis.ticks.y = element_line(color = 'black', size = .75, lineend = 'round'),
+        axis.ticks.x = element_line(color = 'black', size = .75, lineend = 'round'),
         axis.ticks.length = unit(2, 'pt'),
         panel.border = element_blank(),
         panel.background = element_blank(),
