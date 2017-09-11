@@ -12,7 +12,7 @@ theme_bwmin = theme_bw() +
         legend.background = element_blank(),
         legend.key = element_blank(),
         legend.key.size = unit(.75, 'lines'),
-        panel.grid.major = element_blank(),
+        panel.grid.major = element_line(color = 'grey92', size = .5),
         panel.grid.minor = element_blank(),
         axis.line.y = element_line(size = .75, color = 'black', linetype = 'solid', lineend = 'round'),
         axis.line.x = element_line(size = .75, color = 'black', linetype = 'solid', lineend = 'round'),
