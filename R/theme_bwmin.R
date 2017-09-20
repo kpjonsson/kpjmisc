@@ -9,6 +9,7 @@ theme_bwmin = theme_bw() +
         text = element_text(family = 'ArialMT', size = 12, color = 'black'),
         axis.text = element_text(family = 'ArialMT', size = 12, color = 'black'),
         strip.background = element_blank(),
+        strip.text = element_text(family = 'ArialMt', size = 12),
         legend.background = element_blank(),
         legend.key = element_blank(),
         legend.key.size = unit(.75, 'lines'),
