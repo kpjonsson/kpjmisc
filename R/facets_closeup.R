@@ -12,7 +12,7 @@ facets_closeup = function(path,
     ### Which chromosomes?
     chroms = list('BRCA1' = 16:18,
                   'BRCA2' = 12:14)
-    if (!is.null(chrom_range)) chrom_range = chroms[[gene]]
+    if (is.null(chrom_range)) chrom_range = chroms[[gene]]
 
     ### Call close-up function
     gene_cu = close.up(out, fit,
