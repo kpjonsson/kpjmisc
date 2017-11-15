@@ -25,5 +25,6 @@ facets_closeup = function(path,
     egg::ggarrange(gene_cu$cnlr,
                    gene_cu$valor,
                    gene_cu$icnem,
-                   ncol = 1)
+                   ncol = 1,
+                   newpage = F)
 }
