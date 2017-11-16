@@ -1,7 +1,8 @@
 ### Function to do gene-level
 facets_closeup = function(path,
                           gene,
-                          chrom_range = NULL) {
+                          chrom_range = NULL,
+                          plot = T) {
 
     ### Source function?
     if (!exists('close.up')) source('/luna/git/facets-suite/fPlots_ggplot2.R')
@@ -22,9 +23,13 @@ facets_closeup = function(path,
                        bed.path = '/luna/git/facets-suite/Homo_sapiens.GRCh37.75.canonical_exons.bed',
                        col.1 = '#6baed6', col.2 = '#969696')
 
-    egg::ggarrange(gene_cu$cnlr,
-                   gene_cu$valor,
-                   gene_cu$icnem,
-                   ncol = 1,
-                   newpage = F)
+    if (plot) {
+        egg::ggarrange(gene_cu$cnlr,
+                       gene_cu$valor,
+                       gene_cu$icnem,
+                       ncol = 1,
+                       newpage = F)
+    } else {
+        gene_cu
+    }
 }
