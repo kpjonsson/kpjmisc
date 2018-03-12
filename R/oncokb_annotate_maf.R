@@ -1,9 +1,5 @@
 #' @export
 
-suppressPackageStartupMessages({
-    library(httr)
-})
-
 consequence_map = c('3\'Flank'= 'any',
                     '5\'Flank '= 'any',
                     # 'Targeted_Region'= 'inframe_deletion', 'inframe_insertion',
@@ -25,15 +21,15 @@ query_oncokb = function(gene, protein_change, variant_type, start, end, cancer_t
     if (!exists('cached_entries')) cached_entries <<- vector(mode = 'list')
 
     if (tag %nin% names(tag)) {
-        query_url = modify_url(base_url, query = list(
+        query_url = httr::modify_url(base_url, query = list(
             hugoSymbol = gene,
             alteration = protein_change,
             consequence = variant_type,
             tumorType = cancer_type
         ))
 
-        oncokb_response = GET(query_url)
-        oncokb_response = content(oncokb_response)
+        oncokb_response = httr::GET(query_url)
+        oncokb_response = httr::content(oncokb_response)
 
         cached_entries[[tag]] = oncokb_response
     } else {
