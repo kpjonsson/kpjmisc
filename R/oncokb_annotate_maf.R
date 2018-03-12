@@ -20,7 +20,7 @@ query_oncokb = function(gene, protein_change, variant_type, start, end, cancer_t
 
     if (!exists('cached_entries')) cached_entries <<- vector(mode = 'list')
 
-    if (tag %nin% names(tag)) {
+    if (!tag %in% names(tag)) {
         query_url = httr::modify_url(base_url, query = list(
             hugoSymbol = gene,
             alteration = protein_change,
