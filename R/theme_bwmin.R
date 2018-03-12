@@ -1,3 +1,4 @@
+#' @export
 #' Black-and-white minimalistic theme for ggplot2
 #'
 #' Use by adding \code{+theme_bwmin()} to your ggplot call.
