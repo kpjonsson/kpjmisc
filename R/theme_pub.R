@@ -4,6 +4,7 @@
 
 library(ggplot2)
 
+#' @export
 theme_pub = theme_bw() +
     theme(
         text = element_text(family = 'ArialMT', size = 6),

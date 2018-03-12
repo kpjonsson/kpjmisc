@@ -1,4 +1,5 @@
 ### Function to do gene-level
+#' @export
 facets_closeup = function(path,
                           gene,
                           chrom_range = NULL,

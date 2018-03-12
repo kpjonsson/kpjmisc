@@ -1,3 +1,4 @@
+#' @export
 rownum = function(df) {
 
 	if(class(df) %in% c('data.frame', 'data.matrix')) {

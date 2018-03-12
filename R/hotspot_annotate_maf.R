@@ -13,6 +13,7 @@ if (Sys.info()[['nodename']] == 'lski2423') {
     hotspot_files = hs_from_cluster
     }
 
+#' @export
 hotspot_annotate_maf = function(maf, hotspots = NULL)
 {
     if (!inherits(maf, 'data.frame')) stop('Input MAF must be a data frame, preferrable VEP annotated')

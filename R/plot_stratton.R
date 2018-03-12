@@ -1,3 +1,4 @@
+#' @export
 plot_stratton = function(
     maf,
     sample_name = NULL # any number of samples, if none given all will be plotted

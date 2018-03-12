@@ -1,4 +1,5 @@
 ### See http://cancer.sanger.ac.uk/cosmic/signatures
+#' @export
 signatures_map = c('Age','APOBEC','BRCA','Smoking','5',
                    'MMR/MSI','UV','8','POLN','POLE',
                    'TMZ','12','APOBEC','MMR/MSI','MMR/MSI',
@@ -13,6 +14,7 @@ custom_order = c('Age','APOBEC','BRCA','Smoking','MMR/MSI',
                  '17','18','19','23','25',
                  '27','28','30')
 
+#' @export
 read_signatures = function(input_file) {
 
     sign = fread(input_file) %>%

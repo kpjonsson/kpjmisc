@@ -1,3 +1,4 @@
+#' @export
 read_maf = function(maf_path) {
     maf = suppressMessages(suppressWarnings(data.table::fread(maf_path, showProgress = F, verbose = F)))
     maf_rows = nrow(maf)

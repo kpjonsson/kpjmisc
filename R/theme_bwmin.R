@@ -1,10 +1,10 @@
-#' @export
 #' Black-and-white minimalistic theme for ggplot2
 #'
 #' Use by adding \code{+theme_bwmin()} to your ggplot call.
 
 library(ggplot2)
 
+#' @export
 theme_bwmin = theme_bw() +
     theme(
         text = element_text(family = 'ArialMT', size = 12, color = 'black'),

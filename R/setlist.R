@@ -1,3 +1,4 @@
+#' @export
 setlist = function(a, b, output = F) {
     a = unique(a)
     b  = unique(b)

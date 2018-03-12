@@ -1,5 +1,4 @@
 #' @export
-
 consequence_map = c('3\'Flank'= 'any',
                     '5\'Flank '= 'any',
                     # 'Targeted_Region'= 'inframe_deletion', 'inframe_insertion',
@@ -13,6 +12,7 @@ consequence_map = c('3\'Flank'= 'any',
                     'Splice_Site'= 'splice_region_variant',
                     'Translation_Start_Site'= 'start_lost')
 
+#' @export
 query_oncokb = function(gene, protein_change, variant_type, start, end, cancer_type = 'CANCER') {
 
     base_url = 'http://oncokb.org/legacy-api/indicator.json?source=cbioportal'
@@ -48,6 +48,7 @@ query_oncokb = function(gene, protein_change, variant_type, start, end, cancer_t
                                  paste(unlist(drugs), collapse = ',')))
 }
 
+#' @export
 oncokb_annotate_maf = function(maf, cancer_types = NULL)
 {
     if (is.null(cancer_type) & 'cancer_type' %nin% names(maf)) {

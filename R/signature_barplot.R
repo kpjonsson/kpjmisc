@@ -1,3 +1,4 @@
+#' @export
 signature_barplot = function(
   sign,
   col_vec = NULL,

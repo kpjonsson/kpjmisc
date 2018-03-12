@@ -16,10 +16,12 @@ colorspace64 = c("#000000", "#FFFF00", "#1CE6FF", "#FF34FF", "#FF4A46", "#008941
 
 # write.table(colorspace64, file = 'data/colorspace64.txt', sep = '\t', col.names = F, row.names = F)
 
+#' @export
 many_colors = function(n) {
     as.character(colorspace64[1:n])
 }
 
+#' @export
 arsenal_colors = function(n) {
     if (n > 3) stop('Only three colors in palette.')
     c('#EF0107','#023474','#9C824A')[1:n]
