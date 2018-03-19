@@ -1,4 +1,17 @@
-#' @export
+#' Annotate read MAF with OncoKB annotation
+#'
+#' @examples
+#'
+#' Sources of default hotspots below
+#'
+#' @param maf Input MAF
+#' @param cancer_types Data frame with samples mapped to cancer type for accurate levels of actionability
+#'
+#' @return Annotated MAF with columns indicating functionality of mutation and levels of actionability
+#'
+#' @source \url{oncokb.org}
+#' @source \url{github.com/oncokb/oncokb-annotator}
+
 consequence_map = c('3\'Flank'= 'any',
                     '5\'Flank '= 'any',
                     # 'Targeted_Region'= 'inframe_deletion', 'inframe_insertion',

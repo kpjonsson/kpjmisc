@@ -1,4 +1,16 @@
-### Function to do gene-level
+#' Generate gene-level Facets plot
+#'
+#' @param path Path to Rdata oject
+#' @param gene One or multiple genes to plot
+#' @param chrom_range Range of chromosomes
+#' @param plot Plot or save as object
+#' @param adjust_dlr Set dipLogR to 0, essentially normalizing the log ratio
+#'
+#' @return If \code{plot == T} plots cnlr, valor and icnem objects else returns all as objects
+#'
+#' @examples
+#' facets_closeup('path_to_sample.Rdata', 'BRCA1', 17)
+#'
 #' @export
 facets_closeup = function(path,
                           gene,

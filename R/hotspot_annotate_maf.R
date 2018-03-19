@@ -1,3 +1,16 @@
+#' Annotate read MAF with hotspots
+#'
+#' Sources of default hotspots below
+#'
+#' @param maf Input MAF
+#' @param hotspot Custom list of hotspots
+#'
+#' @return Annotated MAF with columns \code{snv_hotspot}, \code{threeD_hotspot}, \code{indel_hotspot_type} and \code{Hotspot} indicating types of hotspots
+#'
+#' @source \url{cancerhotspots.org}
+#' @source \url{3dhotspots.org}
+#' @source \url{www.ncbi.nlm.nih.gov/pubmed/26619011}
+#'
 # Source of hotspots
 hs_from_local = c('/luna/work/hotspots/24k/hotspots_24k_FULL.txt',
                   '/luna/work/hotspots/nbt/hotspots_NBT_FULL.txt',

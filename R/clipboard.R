@@ -1,6 +1,6 @@
 #' Copy object to clipboard
 #'
-#' @param df input object, can be piped through %>%
+#' @param df input object, can be piped through \code{test}
 #'
 #' @return None
 #'
