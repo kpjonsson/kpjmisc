@@ -6,13 +6,11 @@
 \alias{pasteboard}
 \title{Use OS clipboard}
 \usage{
-clipboard(df)
+clipboard(x)
 
 pasteboard(delim = "\\t", header = T)
 }
 \arguments{
-\item{df}{Input object, can be piped through \code{test}}
-
 \item{delim}{What is the delimiter of pasted object?}
 
 \item{header}{Does pasted object have a header line?}
