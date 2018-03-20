@@ -2,7 +2,7 @@
 #'
 #' Copy/paste objects between R and system clipboard
 #'
-#' @param df Input object, can be piped through \code{test}
+#' @param x Input object, can be piped through \code{%>%}
 #' @param delim What is the delimiter of pasted object?
 #' @param header Does pasted object have a header line?
 #'
@@ -13,8 +13,13 @@ NULL
 
 #' @export
 #' @rdname clipboard
-clipboard = function(df) {
-   write.table(df, file = pipe('pbcopy'), col.names = T, row.names = F, sep = '\t', quote = F)
+clipboard = function(x) {
+
+    if (inherits(x, 'data.frame')) {
+        write.table(x, file = pipe('pbcopy'), col.names = T, row.names = F, sep = '\t', quote = F)
+    } else if (inherits(x, 'character')) {
+        writeChar(x, con = pipe('pbcopy'))
+    }
 }
 
 #' @export
