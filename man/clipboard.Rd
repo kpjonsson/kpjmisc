@@ -2,16 +2,24 @@
 % Please edit documentation in R/clipboard.R
 \name{clipboard}
 \alias{clipboard}
-\title{Copy object to clipboard}
+\alias{clipboard}
+\alias{pasteboard}
+\title{Use OS clipboard}
 \usage{
 clipboard(df)
+
+pasteboard(delim = "\\t", header = T)
 }
 \arguments{
-\item{df}{input object, can be piped through \code{test}}
+\item{df}{Input object, can be piped through \code{test}}
+
+\item{delim}{What is the delimiter of pasted object?}
+
+\item{header}{Does pasted object have a header line?}
 }
 \value{
 None
 }
 \description{
-Copy object to clipboard
+Copy/paste objects between R and system clipboard
 }

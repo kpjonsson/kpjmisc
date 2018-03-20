@@ -1,3 +1,13 @@
+#' Set operations
+#'
+#' Returns basic set operations on two lists
+#'
+#' @param a First input vector of items
+#' @param b First input vector of items
+#' @param output Return object with intersect/union of input sets
+#'
+#' @return A list object, if \code{output == TRUE}
+
 #' @export
 setlist = function(a, b, output = F) {
     a = unique(a)

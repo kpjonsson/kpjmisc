@@ -1,3 +1,12 @@
+#' Stratton plot
+#'
+#' Stratton style plot of trinucleotide context of SNVs. Can plot one or more samples
+#'
+#' @param maf Input MAF
+#' @param sample_name Select sample or all present in MAF
+#'
+#' @return \code{ggplot2} plot
+
 #' @export
 plot_stratton = function(
     maf,

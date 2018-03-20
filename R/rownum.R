@@ -1,3 +1,11 @@
+#' Row numbers
+#'
+#' Add row numbers as row names
+#'
+#' @param df Data frame
+#'
+#' @return Data frame with row numbers as row names
+#'
 #' @export
 rownum = function(df) {
 

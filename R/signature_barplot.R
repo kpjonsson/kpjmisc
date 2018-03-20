@@ -1,3 +1,15 @@
+#' Signature barplot
+#'
+#' Simple barplot of mutational signatues across samples
+#'
+#' @param sign Signature data, as from \code{read_signatures}
+#' @param col_vec Override plot colors
+#' @param sample_order Override ordering of samples
+#' @param sign_order Override ordering of signatures
+#' @param labels Override labels
+#'
+#' @return A list object, if \code{output == TRUE}
+
 #' @export
 signature_barplot = function(
   sign,

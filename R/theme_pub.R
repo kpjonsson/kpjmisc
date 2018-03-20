@@ -1,8 +1,15 @@
-#' Minimalistic ggplot2 theme with font and line sizes for publication
+#' \code{ggplot2} theme
 #'
-#' Use by adding \code{+theme_bwmin()} to your ggplot call.
-
-library(ggplot2)
+#' Simple almost-publication-ready theme for \code{ggplot2}
+#
+#' @return None
+#'
+#' @examples
+#' theme_set(theme_pub)
+#' ggplot() + theme_pub
+#'
+#'
+#' @import ggplot2
 
 #' @export
 theme_pub = theme_bw() +

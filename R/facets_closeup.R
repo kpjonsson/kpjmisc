@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' facets_closeup('path_to_sample.Rdata', 'BRCA1', 17)
-#'
+
 #' @export
 facets_closeup = function(path,
                           gene,

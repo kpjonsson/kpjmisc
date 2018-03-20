@@ -1,8 +1,6 @@
 #' Annotate read MAF with OncoKB annotation
 #'
-#' @examples
-#'
-#' Sources of default hotspots below
+#' Adds OncoKB oncogenicity and actionatility annotation to VEP-annotated MAF. See URLs below.
 #'
 #' @param maf Input MAF
 #' @param cancer_types Data frame with samples mapped to cancer type for accurate levels of actionability
@@ -11,6 +9,8 @@
 #'
 #' @source \url{oncokb.org}
 #' @source \url{github.com/oncokb/oncokb-annotator}
+#' @name oncokb_annotate_maf
+NULL
 
 consequence_map = c('3\'Flank'= 'any',
                     '5\'Flank '= 'any',
@@ -26,6 +26,7 @@ consequence_map = c('3\'Flank'= 'any',
                     'Translation_Start_Site'= 'start_lost')
 
 #' @export
+#' @rdname oncokb_annotate_maf
 query_oncokb = function(gene, protein_change, variant_type, start, end, cancer_type = 'CANCER') {
 
     base_url = 'http://oncokb.org/legacy-api/indicator.json?source=cbioportal'
@@ -62,6 +63,7 @@ query_oncokb = function(gene, protein_change, variant_type, start, end, cancer_t
 }
 
 #' @export
+#' @rdname oncokb_annotate_maf
 oncokb_annotate_maf = function(maf, cancer_types = NULL)
 {
     if (is.null(cancer_type) & 'cancer_type' %nin% names(maf)) {

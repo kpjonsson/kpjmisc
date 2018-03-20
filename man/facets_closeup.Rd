@@ -25,5 +25,4 @@ Generate gene-level Facets plot
 }
 \examples{
 facets_closeup('path_to_sample.Rdata', 'BRCA1', 17)
-
 }
