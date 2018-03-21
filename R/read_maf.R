@@ -16,7 +16,7 @@ read_maf = function(maf_path) {
     if (!'t_var_freq' %in% names(maf)) {
         maf = mutate(maf,
                      t_depth = as.numeric(t_alt_count)+as.numeric(t_ref_count),
-                     t_var_freq = as.nummeric(t_alt_count)/t_depth)
+                     t_var_freq = as.numeric(t_alt_count)/t_depth)
     }
     maf
 }
