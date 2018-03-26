@@ -18,6 +18,5 @@ Simple black-and-white theme for \code{ggplot2}
 theme_set(theme_bwmin)
 ggplot() + theme_bwmin
 
-
 }
 \keyword{datasets}

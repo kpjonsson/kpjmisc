@@ -11,6 +11,8 @@ clipboard(x)
 pasteboard(delim = "\\t", header = T)
 }
 \arguments{
+\item{x}{Input object, can be piped through \code{margrittr} pipe}
+
 \item{delim}{What is the delimiter of pasted object?}
 
 \item{header}{Does pasted object have a header line?}

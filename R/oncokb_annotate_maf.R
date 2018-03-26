@@ -10,6 +10,7 @@
 #' @source \url{oncokb.org}
 #' @source \url{github.com/oncokb/oncokb-annotator}
 #'
+#' @import dplyr purrr
 #' @importFrom httr modify_url GET content
 #'
 #' @name oncokb_annotate_maf
@@ -33,6 +34,7 @@ consequence_map = c('3\'Flank'= 'any',
 query_oncokb = function(gene, protein_change, variant_type, start, end, cancer_type = 'CANCER') {
 
     base_url = 'http://oncokb.org/legacy-api/indicator.json?source=cbioportal'
+    oncokb_version = content(GET(base_url))[['dataVersion']]
     tag = paste(gene, protein_change, cancer_type, sep = '-')
 
     if (!exists('cached_entries')) cached_entries <<- vector(mode = 'list')
@@ -62,14 +64,16 @@ query_oncokb = function(gene, protein_change, variant_type, start, end, cancer_t
            oncokb_resistance_level = ifelse(is.null(oncokb_response$highestResistanceLevel), '',
                                             oncokb_response$highestResistanceLevel),
            oncokb_drugs = ifelse(length(drugs) == 0, '',
-                                 paste(unlist(drugs), collapse = ',')))
+                                 paste(unlist(drugs), collapse = ',')),
+           oncokb_version = oncokb_version)
 }
 
 #' @export
 #' @rdname oncokb_annotate_maf
 oncokb_annotate_maf = function(maf, cancer_types = NULL)
 {
-    if (is.null(cancer_type) & 'cancer_type' %nin% names(maf)) {
+    if (is.null(cancer_types) & 'cancer_type' %nin% names(maf)) {
+        message('No cancer types(s) specified, defaults to CANCER')
         maf$cancer_type = 'CANCER'
     } else {
         maf = left_join(maf, cancer_types, by = 'Tumor_Sample_Barcode')

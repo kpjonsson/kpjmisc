@@ -2,7 +2,7 @@
 #'
 #' Copy/paste objects between R and system clipboard
 #'
-#' @param x Input object, can be piped through \code{%>%}
+#' @param x Input object, can be piped through \code{margrittr} pipe
 #' @param delim What is the delimiter of pasted object?
 #' @param header Does pasted object have a header line?
 #'
