@@ -8,12 +8,12 @@ fisher_test(a, a_total, b, b_total, alternative = "two.sided",
   conf_level = 0.95)
 }
 \arguments{
-\item{a, a_total, b, b_total}{Test groups A and B,}
+\item{a, a_total, b, b_total}{Test groups A and B}
 
 \item{alternative}{\code{two.sided} \code{greater} or \code{less}}
 }
 \value{
-Tidy output from \code{fisher.test}
+Test statistics
 }
 \description{
 Wraps \code{fisher.test} and tidies the output with \code{broom}
