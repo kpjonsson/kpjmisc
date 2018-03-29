@@ -7,9 +7,6 @@
 #' @examples
 #' theme_set(theme_pub)
 #' ggplot() + theme_pub
-#'
-#'
-#' @import ggplot2
 
 #' @export
 theme_pub = theme_bw() +

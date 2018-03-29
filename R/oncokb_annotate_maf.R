@@ -10,7 +10,7 @@
 #' @source \url{oncokb.org}
 #' @source \url{github.com/oncokb/oncokb-annotator}
 #'
-#' @import dplyr purrr
+#' @import purrr
 #' @importFrom httr modify_url GET content
 #'
 #' @name oncokb_annotate_maf

@@ -13,11 +13,12 @@ NULL
 
 #' @export
 #' @rdname clipboard
-clipboard = function(x) {
+clipboard = function(x, delim = ',') {
 
     if (inherits(x, 'data.frame')) {
         write.table(x, file = pipe('pbcopy'), col.names = T, row.names = F, sep = '\t', quote = F)
     } else if (inherits(x, 'character')) {
+        x = paste0(x, collapse = delim)
         writeChar(x, con = pipe('pbcopy'))
     }
 }

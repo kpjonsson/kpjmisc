@@ -8,9 +8,6 @@
 #' theme_set(theme_bwmin)
 #' ggplot() + theme_bwmin
 #'
-#' @importFrom ggplot2 theme_bw
-#'
-#' @import ggplot2
 
 #' @export
 theme_bwmin = theme_bw() +
