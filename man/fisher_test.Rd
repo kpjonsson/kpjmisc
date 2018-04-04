@@ -4,13 +4,13 @@
 \alias{fisher_test}
 \title{Fisher's test}
 \usage{
-fisher_test(a, a_total, b, b_total, alternative = "two.sided",
-  conf_level = 0.95)
+fisher_test(a_positive, a_negative, b_positive, b_negative,
+  alternative = "two.sided", conf_level = 0.95)
 }
 \arguments{
-\item{a, a_total, b, b_total}{Test groups A and B}
-
 \item{alternative}{\code{two.sided} \code{greater} or \code{less}}
+
+\item{a, a_total, b, b_total}{Test groups A and B}
 }
 \value{
 Test statistics

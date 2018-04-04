@@ -6,7 +6,7 @@
 \alias{pasteboard}
 \title{Use OS clipboard}
 \usage{
-clipboard(x)
+clipboard(x, delim = ",")
 
 pasteboard(delim = "\\t", header = T)
 }

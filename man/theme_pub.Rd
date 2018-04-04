@@ -17,7 +17,5 @@ Simple almost-publication-ready theme for \code{ggplot2}
 \examples{
 theme_set(theme_pub)
 ggplot() + theme_pub
-
-
 }
 \keyword{datasets}
