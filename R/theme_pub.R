@@ -9,8 +9,7 @@
 #' ggplot() + theme_pub
 
 #' @export
-# theme_pub = theme_bw() +
-theme_pub = theme_bw() %+replace%
+theme_pub = theme_bw() +
     theme(
         text = element_text(family = 'ArialMT', size = 6),
         axis.text = element_text(family = 'ArialMT', size = 6, color = 'black'),
