@@ -11,8 +11,7 @@
 #' @import ggplot2
 
 #' @export
-# theme_bwmin = theme_bw() +
-theme_bwmin = theme_bw() %+replace%
+theme_bwmin = theme_bw() +
     theme(
         text = element_text(family = 'ArialMT', size = 12, color = 'black'),
         axis.text = element_text(family = 'ArialMT', size = 12, color = 'black'),
