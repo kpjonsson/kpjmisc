@@ -88,7 +88,7 @@ read_impact_samples = function(filename = NULL) {
 
     f = tryCatch(
         {
-            suppressWarnings(suppressMessages(read_tsv(paste0(basedir, '/', fn)), comment = '#'))
+            suppressWarnings(suppressMessages(read_tsv(paste0(basedir, '/', fn), comment = '#')))
         },
         error = function(e) {
             stop('Cannot read file, check that cluster is mounted')
@@ -114,7 +114,7 @@ read_impact_patients = function(filename = NULL) {
 
     f = tryCatch(
         {
-            suppressWarnings(suppressMessages(read_tsv(paste0(basedir, '/', fn)), comment = '#'))
+            suppressWarnings(suppressMessages(read_tsv(paste0(basedir, '/', fn), comment = '#')))
         },
         error = function(e) {
             stop('Cannot read file, check that cluster is mounted')
