@@ -9,6 +9,7 @@
 #' @return Data object in tweaked cBioPortal format
 #'
 #' @importFrom readr read_tsv
+#' @importFrom janitor clean_names
 #'
 #' @name read_impact_repository_files
 NULL
@@ -94,7 +95,7 @@ read_impact_samples = function(filename = NULL) {
             stop('Cannot read file, check that cluster is mounted')
         }
     )
-
+    clean_names(f)
     message(paste('Reading clinical file with:\n',
                   format(length(unique(f$sample_id)), big.mark = ',', scientific = FALSE),
                   'samples'))
@@ -120,7 +121,7 @@ read_impact_patients = function(filename = NULL) {
             stop('Cannot read file, check that cluster is mounted')
         }
     )
-
+    f = clean_names(f)
     message(paste('Reading clinical file with:\n',
                   format(length(unique(f$patient_id)), big.mark = ',', scientific = FALSE),
                   'samples'))
