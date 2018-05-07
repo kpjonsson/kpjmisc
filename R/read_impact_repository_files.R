@@ -95,7 +95,7 @@ read_impact_samples = function(filename = NULL) {
             stop('Cannot read file, check that cluster is mounted')
         }
     )
-    clean_names(f)
+    f = clean_names(f)
     message(paste('Reading clinical file with:\n',
                   format(length(unique(f$sample_id)), big.mark = ',', scientific = FALSE),
                   'samples'))
