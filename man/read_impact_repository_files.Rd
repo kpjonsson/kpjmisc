@@ -4,17 +4,17 @@
 \alias{read_impact_repository_files}
 \alias{read_impact_maf}
 \alias{read_impact_cna}
-\alias{read_impact_sample_clin}
-\alias{read_impact_patient_clin}
+\alias{read_impact_samples}
+\alias{read_impact_patients}
 \title{Helper functions to read files from MSK-IMPACT repository}
 \usage{
 read_impact_maf(filename = NULL, unfiltered = F, germline = F)
 
 read_impact_cna(filename = NULL)
 
-read_impact_sample_clin(filename = NULL)
+read_impact_samples(filename = NULL)
 
-read_impact_patient_clin(filename = NULL)
+read_impact_patients(filename = NULL)
 }
 \arguments{
 \item{filename}{Override default filenames, assumes they exist in default location}
