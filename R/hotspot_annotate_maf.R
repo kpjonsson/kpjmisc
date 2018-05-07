@@ -7,7 +7,6 @@
 #'
 #' @return Annotated MAF with columns \code{snv_hotspot}, \code{threeD_hotspot}, \code{indel_hotspot_type} and \code{Hotspot} indicating types of hotspots
 #'
-#'
 #' @source \url{cancerhotspots.org}
 #' @source \url{3dhotspots.org}
 #' @source \url{www.ncbi.nlm.nih.gov/pubmed/26619011}
@@ -77,7 +76,8 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
                  residue = str_extract(Protein_position, '^[0-9]+(?=/|-)'),
                  start_residue = residue,
                  end_residue = str_extract(Protein_position, '(?<=-)[0-9]+(?=/)'),
-                 end_residue = ifelse(is.na(end_residue) & Variant_Classification %like% 'In_Frame', start_residue, end_residue)) %>%
+                 end_residue = ifelse(is.na(end_residue) & Variant_Classification %like% 'In_Frame',
+                                      start_residue, end_residue)) %>%
         rowwise() %>%
         mutate(
             start_residue = as.numeric(start_residue),

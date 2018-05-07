@@ -4,7 +4,7 @@
 \name{theme_pub}
 \alias{theme_pub}
 \title{\code{ggplot2} theme}
-\format{An object of class \code{theme} (inherits from \code{gg}) of length 63.}
+\format{An object of class \code{theme} (inherits from \code{gg}) of length 65.}
 \usage{
 theme_pub
 }

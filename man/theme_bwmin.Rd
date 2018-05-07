@@ -4,7 +4,7 @@
 \name{theme_bwmin}
 \alias{theme_bwmin}
 \title{\code{ggplot2} theme}
-\format{An object of class \code{theme} (inherits from \code{gg}) of length 60.}
+\format{An object of class \code{theme} (inherits from \code{gg}) of length 62.}
 \usage{
 theme_bwmin
 }
