@@ -95,7 +95,7 @@ read_impact_samples = function(filename = NULL) {
         }
     )
 
-    message(paste('Reading clinica file with:\n',
+    message(paste('Reading clinical file with:\n',
                   format(length(unique(f$sample_id)), big.mark = ',', scientific = FALSE),
                   'samples'))
 
@@ -121,7 +121,7 @@ read_impact_patients = function(filename = NULL) {
         }
     )
 
-    message(paste('Reading clinica file with:\n',
+    message(paste('Reading clinical file with:\n',
                   format(length(unique(f$patient_id)), big.mark = ',', scientific = FALSE),
                   'samples'))
 
