@@ -85,10 +85,12 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
         mutate(
             start_residue = as.numeric(start_residue),
             end_residue = as.numeric(end_residue),
-            snv_hotspot = ifelse(Variant_Type == 'SNP' & Variant_Classification %in% coding_mutations & !is.na(residue),
+            snv_hotspot = ifelse(Variant_Type %in% c('SNP', 'DNP') &
+                                     Variant_Classification %in% coding_mutations & !is.na(residue),
                                  str_c(Hugo_Symbol, residue) %in% hotspots$tag[hotspots$snv_hotspot == T],
                                  FALSE),
-            threeD_hotspot = ifelse(Variant_Type == 'SNP' & Variant_Classification %in% coding_mutations & !is.na(residue),
+            threeD_hotspot = ifelse(Variant_Type %in% c('SNP', 'DNP') &
+                                         Variant_Classification %in% coding_mutations & !is.na(residue),
                                     str_c(Hugo_Symbol, residue) %in% hotspots$tag[hotspots$threeD_hotspot == T],
                                     FALSE),
             indel_hotspot_type = ifelse(Variant_Classification %like% 'In_Frame',
