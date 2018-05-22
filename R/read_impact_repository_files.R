@@ -8,7 +8,7 @@
 #'
 #' @return Data object in tweaked cBioPortal format
 #'
-#' @importFrom readr read_tsv
+#' @importFrom data.table fread
 #' @importFrom janitor clean_names
 #'
 #' @name read_impact_repository_files
@@ -89,7 +89,7 @@ read_impact_samples = function(filename = NULL) {
 
     f = tryCatch(
         {
-            suppressWarnings(suppressMessages(read_tsv(paste0(basedir, '/', fn), comment = '#')))
+            suppressWarnings(suppressMessages(fread(paste0(basedir, '/', fn), skip = 'SAMPLE_ID')))
         },
         error = function(e) {
             stop('Cannot read file, check that cluster is mounted')
@@ -115,7 +115,7 @@ read_impact_patients = function(filename = NULL) {
 
     f = tryCatch(
         {
-            suppressWarnings(suppressMessages(read_tsv(paste0(basedir, '/', fn), comment = '#')))
+            suppressWarnings(suppressMessages(fread(paste0(basedir, '/', fn), skip = 'PATIENT_ID')))
         },
         error = function(e) {
             stop('Cannot read file, check that cluster is mounted')

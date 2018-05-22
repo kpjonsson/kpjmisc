@@ -11,6 +11,8 @@
 #' @source \url{3dhotspots.org}
 #' @source \url{www.ncbi.nlm.nih.gov/pubmed/26619011}
 #'
+#' @importFrom tidyr replace_na
+#'
 #' @name hotspot_annotate_maf
 NULL
 
@@ -78,6 +80,7 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
                  end_residue = str_extract(Protein_position, '(?<=-)[0-9]+(?=/)'),
                  end_residue = ifelse(is.na(end_residue) & Variant_Classification %like% 'In_Frame',
                                       start_residue, end_residue)) %>%
+        replace_na(list(start_residue = 0, end_residue = 0)) %>%
         rowwise() %>%
         mutate(
             start_residue = as.numeric(start_residue),
@@ -89,7 +92,9 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
                                     str_c(Hugo_Symbol, residue) %in% hotspots$tag[hotspots$threeD_hotspot == T],
                                     FALSE),
             indel_hotspot_type = ifelse(Variant_Classification %like% 'In_Frame',
-                                        tag_indel_hotspot(Hugo_Symbol, start_residue, end_residue),
+                                        tag_indel_hotspot(Hugo_Symbol,
+                                                          as.numeric(start_residue),
+                                                          as.numeric(end_residue)),
                                         'none'),
             indel_hotspot = indel_hotspot_type != 'none',
             Hotspot = snv_hotspot == T | threeD_hotspot == T | indel_hotspot == T)
