@@ -11,3 +11,6 @@
 #' }
 #' @source \url{http://cmo.mskcc.org/cmo/resources/gene-lists/}
 "impact_genes"
+
+# impact_genes = fread('impact-468.txt')
+# devtools::use_data(impact_genes)
