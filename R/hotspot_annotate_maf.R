@@ -12,6 +12,8 @@
 #' @source \url{www.ncbi.nlm.nih.gov/pubmed/26619011}
 #'
 #' @importFrom tidyr replace_na
+#' @importFrom jsonlite fromJSON
+#' @importFrom readr read_lines
 #'
 #' @name hotspot_annotate_maf
 NULL
@@ -31,6 +33,11 @@ if (Sys.info()[['nodename']] == 'lski2423') {
     hotspot_files = hs_from_cluster
     }
 
+load_gene_annotation = function() {
+    read_lines('http://oncokb.org/api/v1/genes') %>%
+        fromJSON()
+}
+
 #' @export
 #' @rdname hotspot_annotate_maf
 hotspot_annotate_maf = function(maf, hotspots = NULL)
@@ -43,6 +50,8 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
     if (any(grepl('hotspot', tolower(names(hotspots))))) message('Hotspot columns in MAF might be overwritten, check names')
 
     # Read default hotspot lists if user does not supply
+    gene_annotation = load_gene_annotation()
+
     if (is.null(hotspots)) {
         hotspots = map_dfr(hotspot_files, fread) %>%
             mutate(indel_hotspot = Type == 'in-frame indel',
@@ -93,7 +102,7 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
             is_hotspot = str_c(gene, start) %in% gene_hotspots$tag
         } else if (type == 'SNP' & trunc == T) {
             is_hotspot = str_c(gene, start) %in% gene_hotspots$tag &
-                '*' %in% unlist(gene_hotspots$previous_mutations[gene_hotspots$tag == str_c(gene, start)])
+                gene %in% gene_annotation$hugoSymbol[gene_annotation$tsg == T]
         } else if (mut_length > 3) {
             is_hotspot = FALSE
         } else if (any(c(str_c(gene, start), str_c(gene, end)) %in% gene_hotspots$tag) &
@@ -101,8 +110,7 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
             is_hotspot = TRUE
         } else if (any(c(str_c(gene, start), str_c(gene, end)) %in% gene_hotspots$tag) &
                    trunc == T) {
-            tag_i = which(c(str_c(gene, start), str_c(gene, end)) %in% gene_hotspots$tag)
-            is_hotspot = '*' %in% unlist(gene_hotspots$previous_mutations[which(gene_hotspots$tag==c(str_c(gene, start), str_c(gene, end))[tag_i])])
+            is_hotspot = gene %in% gene_annotation$hugoSymbol[gene_annotation$tsg == T]
         }
         return(is_hotspot)
     }
