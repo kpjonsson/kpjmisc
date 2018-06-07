@@ -12,6 +12,8 @@
 #' @source \url{www.ncbi.nlm.nih.gov/pubmed/26619011}
 #'
 #' @importFrom tidyr replace_na
+#' @importFrom jsonlite fromJSON
+#' @importFrom readr read_lines
 #'
 #' @name hotspot_annotate_maf
 NULL
@@ -31,6 +33,11 @@ if (Sys.info()[['nodename']] == 'lski2423') {
     hotspot_files = hs_from_cluster
     }
 
+load_gene_annotation = function() {
+    read_lines('http://oncokb.org/api/v1/genes') %>%
+        fromJSON()
+}
+
 #' @export
 #' @rdname hotspot_annotate_maf
 hotspot_annotate_maf = function(maf, hotspots = NULL)
@@ -43,6 +50,8 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
     if (any(grepl('hotspot', tolower(names(hotspots))))) message('Hotspot columns in MAF might be overwritten, check names')
 
     # Read default hotspot lists if user does not supply
+    gene_annotation = load_gene_annotation()
+
     if (is.null(hotspots)) {
         hotspots = map_dfr(hotspot_files, fread) %>%
             mutate(indel_hotspot = Type == 'in-frame indel',
@@ -52,8 +61,9 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
                    Pos = ifelse(indel_hotspot == F, str_extract(Residue, '(?<=[A-Z])[0-9]+'), NA),
                    Start = ifelse(indel_hotspot == T, str_extract(Residue, '^[0-9]+(?=-)'), NA),
                    End = ifelse(indel_hotspot == T, str_extract(Residue, '(?<=-)[0-9]+$'), NA),
-                   Pos = ifelse(indel_hotspot == T & is.na(Start), Residue, Pos)) %>%
-            distinct(Gene, Residue, snv_hotspot, indel_hotspot, threeD_hotspot, Pos, Start, End) %>%
+                   Pos = ifelse(indel_hotspot == T & is.na(Start), Residue, Pos),
+                   previous_mutations = str_replace_all(Variants, ':[0-9]+\\|?', ',')) %>%
+            distinct(Gene, Residue, snv_hotspot, indel_hotspot, threeD_hotspot, Pos, Start, End, previous_mutations) %>%
             mutate(tag = str_c(Gene, Pos),
                    Pos = as.numeric(Pos),
                    Start = as.numeric(Start),
@@ -61,16 +71,47 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
     }
 
     # Function that deals with indel hotspots
-    tag_indel_hotspot = function(gene, start, end) {
+    tag_indel_hotspot = function(gene, hgvsp_short, start, end, indel_length) {
         is_hotspot = 'none'
-        if (end - start <= 5) { # if short hotspot overlapping known hotspot
+        gene_hotspots = filter(hotspots, Gene == gene, indel_hotspot == T) %>% # checks if previously identified
+            pull(previous_mutations) %>%
+            str_split(',') %>%
+            unlist() %>%
+            discard(. == '')
+        start_res = as.numeric(str_extract(gene_hotspots, '[0-9]+(?=_)'))
+        end_res = as.numeric(str_extract(gene_hotspots, '(?<=_[A-Z]{1})[0-9]+'))
+        longest_variant = max(end_res-start_res, na.rm = T)
+        indel_hs = filter(hotspots, Gene == gene, indel_hotspot == T) %>% # checks if overlap with hotspot intervals
+            filter(Start-1 <= (start+2) & End >= (end-2) & indel_length <= (longest_variant+1)) # allow for wiggle room in both directions but not too long indel
+        if (nrow(indel_hs) > 0 | str_replace(hgvsp_short, 'p.', '') %in% gene_hotspots) {
+            is_hotspot = 'prior'
+        } else if (end - start <= 5) { # if short hotspot overlapping known hotspot
             snv_hs = filter(hotspots, Gene == gene & (indel_hotspot == F | is.na(End))) %>% # includes indel hotspots that only cover one codon
                 filter(between(Pos, start, end))
             if (nrow(snv_hs) > 0) is_hotspot = 'novel'
         }
-        indel_hs = filter(hotspots, Gene == gene, indel_hotspot == T) %>%
-            filter(Start <= start & End >= end)
-        if (nrow(indel_hs) > 0) is_hotspot = 'prior'
+        return(is_hotspot)
+    }
+
+    tag_onp_hotspot = function(gene, type, trunc, start, end, mut_length) {
+        is_hotspot = FALSE
+        gene_hotspots = filter(hotspots, Gene == gene, snv_hotspot == T) %>% # checks if previously identified
+            select(tag, previous_mutations) %>%
+            mutate(previous_mutations = map(previous_mutations, ~unlist(str_split(., ','))))
+        if(type == 'SNP' & trunc == F) {
+            is_hotspot = str_c(gene, start) %in% gene_hotspots$tag
+        } else if (type == 'SNP' & trunc == T) {
+            is_hotspot = str_c(gene, start) %in% gene_hotspots$tag &
+                gene %in% gene_annotation$hugoSymbol[gene_annotation$tsg == T]
+        } else if (mut_length > 3) {
+            is_hotspot = FALSE
+        } else if (any(c(str_c(gene, start), str_c(gene, end)) %in% gene_hotspots$tag) &
+                   trunc == F) {
+            is_hotspot = TRUE
+        } else if (any(c(str_c(gene, start), str_c(gene, end)) %in% gene_hotspots$tag) &
+                   trunc == T) {
+            is_hotspot = gene %in% gene_annotation$hugoSymbol[gene_annotation$tsg == T]
+        }
         return(is_hotspot)
     }
 
@@ -85,9 +126,22 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
         mutate(
             start_residue = as.numeric(start_residue),
             end_residue = as.numeric(end_residue),
-            snv_hotspot = ifelse(Variant_Type %in% c('SNP', 'DNP') &
-                                     Variant_Classification %in% c('Missense_Mutation', 'Splice_Site') & !is.na(residue),
-                                 str_c(Hugo_Symbol, residue) %in% hotspots$tag[hotspots$snv_hotspot == T],
+            variant_length = case_when(
+                Variant_Type %in% c('SNP', 'DNP', 'TNP', 'ONP') ~ nchar(Reference_Allele)/3,
+                Variant_Classification == 'In_Frame_Del' ~ nchar(Reference_Allele)/3,
+                Variant_Classification == 'In_Frame_Ins' ~ nchar(Tumor_Seq_Allele2)/3,
+            ),
+            snv_hotspot = ifelse(Variant_Type %like% 'NP$' &
+                                     Variant_Classification %in% coding_mutations &
+                                     !is.na(residue),
+                                 tag_onp_hotspot(
+                                     Hugo_Symbol,
+                                     Variant_Type,
+                                     Variant_Classification %in% truncating_mutations,
+                                     as.numeric(start_residue),
+                                     as.numeric(end_residue),
+                                     variant_length
+                                     ),
                                  FALSE),
             threeD_hotspot = ifelse(Variant_Type %in% c('SNP', 'DNP') &
                                          Variant_Classification %in% coding_mutations & !is.na(residue),
@@ -95,8 +149,10 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
                                     FALSE),
             indel_hotspot_type = ifelse(Variant_Classification %like% 'In_Frame',
                                         tag_indel_hotspot(Hugo_Symbol,
+                                                          HGVSp_Short,
                                                           as.numeric(start_residue),
-                                                          as.numeric(end_residue)),
+                                                          as.numeric(end_residue),
+                                                          variant_length),
                                         'none'),
             indel_hotspot = indel_hotspot_type != 'none',
             Hotspot = snv_hotspot == T | threeD_hotspot == T | indel_hotspot == T)
