@@ -53,7 +53,7 @@ plot_stratton = function(
     ### Plot
     out_plot = ggplot(trinuc_maf, aes(TriNuc_Context, TriNuc_Frac, fill = Transition)) +
         geom_bar(stat = 'identity') +
-        theme(text = element_text(family = 'Helvetica', size = 12), axis.text = element_text(color = 'black'),
+        theme(text = element_text(family = 'ArialMT', size = 12), axis.text = element_text(color = 'black'),
               axis.ticks.x = element_blank(), axis.text.x = element_text(angle = 90, vjust = .5, hjust = 0, size = 5),
               panel.background = element_blank(), legend.key = element_rect(color = 'white', size = 3),
               legend.title = element_blank(), legend.key.size = unit(.75, 'lines'), panel.grid = element_blank(),
@@ -61,7 +61,8 @@ plot_stratton = function(
               axis.line = element_line(color = 'black', size = .5)) +
         labs(x = '', y = 'Fraction of mutations') +
         scale_x_discrete(labels = paste0(str_sub(levels(trinuc_maf$TriNuc_Context),1,2), str_sub(levels(trinuc_maf$TriNuc_Context),4,4))) +
-        scale_fill_manual(values = c("#1EBFF0", "#050708", "#E62725", "#CBCACB", "#A1CF64", "#EDC8C5")) +
+        scale_fill_manual(values = c("#6baed6", "#252525", "#cb181d", "#969696", "#41ab5d", "#c994c7")) +
+
         scale_y_continuous(expand = c(0,0)) # +
         #geom_hline(yintercept = seq(0, max(as.numeric(trinuc_maf$TriNuc_Frac)), .05), col = 'white', size = .5, alpha = .5)
 
