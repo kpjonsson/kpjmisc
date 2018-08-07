@@ -79,17 +79,47 @@ read_impact_cna = function(filename = NULL) {
 
 #' @export
 #' @rdname read_impact_repository_files
+read_impact_fusions = function(filename = NULL) {
+
+    if (!is.null(filename)) {
+        fn = filename
+    } else {
+        fn = 'data_fusions.txt'
+    }
+
+    f = tryCatch(
+        {
+            suppressWarnings(suppressMessages(fread(paste0(basedir, '/', fn))))
+        },
+        error = function(e) {
+            stop('Cannot read file, check that cluster is mounted')
+        }
+    )
+
+    f = select(f, Tumor_Sample_Barcode, Hugo_Symbol, everything()) %>%
+        rename_at(vars(-matches('Tumor_Sample_Barcode|Hugo_Symbol')), funs(str_to_lower(.))) %>%
+        select(-center, -method, -entrez_gene_id)
+
+    message(paste('Reading fusion file with:\n',
+                  format(length(unique(f$Tumor_Sample_Barcode)), big.mark = ',', scientific = FALSE),
+                  'samples'))
+
+    f
+}
+
+#' @export
+#' @rdname read_impact_repository_files
 read_impact_samples = function(filename = NULL) {
 
     if (!is.null(filename)) {
         fn = filename
     } else {
-        fn = 'data_clinical_sample.txt'
+        fn = paste0(basedir, '/', 'data_clinical_sample.txt')
     }
 
     f = tryCatch(
         {
-            suppressWarnings(suppressMessages(fread(paste0(basedir, '/', fn), skip = 'SAMPLE_ID')))
+            suppressWarnings(suppressMessages(fread(fn, skip = 'SAMPLE_ID')))
         },
         error = function(e) {
             stop('Cannot read file, check that cluster is mounted')

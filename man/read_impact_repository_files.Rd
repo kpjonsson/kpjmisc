@@ -4,6 +4,7 @@
 \alias{read_impact_repository_files}
 \alias{read_impact_maf}
 \alias{read_impact_cna}
+\alias{read_impact_fusions}
 \alias{read_impact_samples}
 \alias{read_impact_patients}
 \title{Helper functions to read files from MSK-IMPACT repository}
@@ -11,6 +12,8 @@
 read_impact_maf(filename = NULL, unfiltered = F, germline = F)
 
 read_impact_cna(filename = NULL)
+
+read_impact_fusions(filename = NULL)
 
 read_impact_samples(filename = NULL)
 
