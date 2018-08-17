@@ -29,6 +29,17 @@ consequence_map = c('3\'Flank'= 'any',
                     'Splice_Site'= 'splice_region_variant',
                     'Translation_Start_Site'= 'start_lost')
 
+coding_mutations = c('Frame_Shift_Del',
+                     'Frame_Shift_Ins',
+                     'In_Frame_Del',
+                     'In_Frame_Ins',
+                     'Missense_Mutation',
+                     'Nonsense_Mutation',
+                     'Nonstop_Mutation',
+                     'Splice_Site',
+                     'Targeted_Region',
+                     'Translation_Start_Site')
+
 #' @export
 #' @rdname oncokb_annotate_maf
 query_oncokb = function(gene, protein_change, variant_type, start, end, cancer_type = 'CANCER') {
@@ -56,7 +67,9 @@ query_oncokb = function(gene, protein_change, variant_type, start, end, cancer_t
     }
 
     drugs = map(oncokb_response$treatments, 'drugs') %>%
-        map(., function(x) paste(unlist(x)))
+        map(., function(x) paste(unlist(x))) %>%
+        simplify %>%
+        unique
 
     tibble(oncogenic = as.character(oncokb_response$oncogenic),
            oncokb_level = ifelse(is.null(oncokb_response$highestSensitiveLevel), '',
@@ -64,7 +77,7 @@ query_oncokb = function(gene, protein_change, variant_type, start, end, cancer_t
            oncokb_resistance_level = ifelse(is.null(oncokb_response$highestResistanceLevel), '',
                                             oncokb_response$highestResistanceLevel),
            oncokb_drugs = ifelse(length(drugs) == 0, '',
-                                 paste(unlist(drugs), collapse = ',')),
+                                 paste(unlist(unique(drugs)), collapse = ',')),
            oncokb_version = oncokb_version)
 }
 
@@ -82,9 +95,12 @@ oncokb_annotate_maf = function(maf, cancer_types = NULL)
     oncokb_cols = mutate(maf,
            gene = Hugo_Symbol,
            protein_change = str_replace(HGVSp_Short, 'p.', ''),
-           variant_type = revalue(Variant_Classification, consequence_map, warn_missing = F),
+           variant_type = case_when(
+               Variant_Classification %in% coding_mutations | Hugo_Symbol == 'TERT' ~
+                   revalue(Variant_Classification, consequence_map, warn_missing = F),
+               TRUE ~ ''),
            start = str_extract(Protein_position, '^[0-9]+(?=\\/|\\-)'),
-           end = str_extract(Protein_position, '(?<=-)[0-9]+(?=/)'),
+           end = str_extract(Protein_position, '(?<=-)[0-9]+(?=/)')
            ) %>%
         select(gene, protein_change, variant_type, start, end, cancer_type) %>%
         pmap_dfr(., query_oncokb)
