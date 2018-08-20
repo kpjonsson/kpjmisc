@@ -20,12 +20,12 @@ NULL
 
 # Source of hotspots
 hs_from_local = c('/luna/work/hotspots/24k/hotspots_24k_FULL.txt',
-                  '/luna/work/hotspots/nbt/hotspots_NBT_FULL.txt',
-                  '/luna/work/hotspots/3d/hotspots.txt')
+                  '/luna/work/hotspots/nbt/hotspots_NBT_FULL_FP_annotated.txt',
+                  '/luna/work/hotspots/3d/hotspots_FP_annotated.txt')
 
 hs_from_cluster = c('/ifs/work/taylorlab/jonssonp/hotspots/24k/hotspots_24k_FULL.txt',
-                    '/ifs/work/taylorlab/jonssonp/hotspots/nbt/hotspots_NBT_FULL.txt',
-                    '/ifs/work/taylorlab/jonssonp/hotspots/3d/hotspots.txt')
+                    '/ifs/work/taylorlab/jonssonp/hotspots/nbt/hotspots_NBT_FULL_FP_annotated.txt',
+                    '/ifs/work/taylorlab/jonssonp/hotspots/3d/hotspots_FP_annotated.txt')
 
 if (Sys.info()[['nodename']] == 'lski2423') {
     hotspot_files =  hs_from_local
@@ -53,21 +53,29 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
     gene_annotation = load_gene_annotation()
 
     if (is.null(hotspots)) {
-        hotspots = map_dfr(hotspot_files, fread) %>%
+        hotspots = map_dfr(hotspot_files, function(x) fread(x) %>% mutate(source = x)) %>%
             mutate(indel_hotspot = Type == 'in-frame indel',
-                   indel_hotspot = ifelse(is.na(indel_hotspot), F, indel_hotspot),
-                   threeD_hotspot = ifelse(Class %in% c('Hotspot-linked', 'Cluster-exclusive'), T, F),
-                   snv_hotspot = indel_hotspot == F & threeD_hotspot == F,
+                   indel_hotspot = ifelse(is.na(indel_hotspot), FALSE, indel_hotspot),
+                   threeD_hotspot = ifelse(Class %in% c('Hotspot-linked', 'Cluster-exclusive'), TRUE, FALSE),
+                   snv_hotspot = source %like% 'NBT|24k' & indel_hotspot == FALSE,
                    Pos = ifelse(indel_hotspot == F, str_extract(Residue, '(?<=[A-Z])[0-9]+'), NA),
                    Start = ifelse(indel_hotspot == T, str_extract(Residue, '^[0-9]+(?=-)'), NA),
                    End = ifelse(indel_hotspot == T, str_extract(Residue, '(?<=-)[0-9]+$'), NA),
                    Pos = ifelse(indel_hotspot == T & is.na(Start), Residue, Pos),
                    previous_mutations = str_replace_all(Variants, ':[0-9]+\\|?', ',')) %>%
-            distinct(Gene, Residue, snv_hotspot, indel_hotspot, threeD_hotspot, Pos, Start, End, previous_mutations) %>%
+            replace_na(list(false_positive = FALSE)) %>%
+            group_by(Gene, Residue, Pos, Start, End) %>%
+            summarize(indel_hotspot = any(indel_hotspot == T, na.rm = T),
+                      snv_hotspot = any(snv_hotspot == T, na.rm = T),
+                      threeD_hotspot = any(threeD_hotspot == T, na.rm = T),
+                      previous_mutations = paste(c(unique(unlist(strsplit(previous_mutations, ',')))), collapse = ','),
+                      false_positive = all(false_positive == T, na.rm = T)) %>%
+            ungroup() %>%
             mutate(tag = str_c(Gene, Pos),
                    Pos = as.numeric(Pos),
                    Start = as.numeric(Start),
-                   End = as.numeric(End))
+                   End = as.numeric(End)) %>%
+            filter(false_positive == FALSE)
     }
 
     # Function that deals with indel hotspots
