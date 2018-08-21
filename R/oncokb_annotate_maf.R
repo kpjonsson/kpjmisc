@@ -43,7 +43,9 @@ coding_mutations = c('Frame_Shift_Del',
 #' @export
 #' @rdname oncokb_annotate_maf
 query_oncokb = function(gene, protein_change, variant_type, start, end, cancer_type = 'CANCER') {
-
+  
+  if (variant_type != '') {
+    
     base_url = 'http://oncokb.org/legacy-api/indicator.json?source=cbioportal'
     oncokb_version = content(GET(base_url))[['dataVersion']]
     tag = paste(gene, protein_change, cancer_type, sep = '-')
@@ -79,6 +81,7 @@ query_oncokb = function(gene, protein_change, variant_type, start, end, cancer_t
            oncokb_drugs = ifelse(length(drugs) == 0, '',
                                  paste(unlist(unique(drugs)), collapse = ',')),
            oncokb_version = oncokb_version)
+  } else { tibble(oncogenic = '') } 
 }
 
 #' @export
@@ -96,9 +99,11 @@ oncokb_annotate_maf = function(maf, cancer_types = NULL)
            gene = Hugo_Symbol,
            protein_change = str_replace(HGVSp_Short, 'p.', ''),
            variant_type = case_when(
-               Variant_Classification %in% coding_mutations | Hugo_Symbol == 'TERT' ~
+               (Variant_Classification %in% coding_mutations & HGVSp_Short != '') | # this is necessary to avoid poorly annotated but likely FP indel calls from Pindel
+               (Variant_Classification == 'Splice_Site' & HGVSc != '') |
+                Hugo_Symbol == 'TERT' ~
                    revalue(Variant_Classification, consequence_map, warn_missing = F),
-               TRUE ~ ''),
+             TRUE ~ ''),
            start = str_extract(Protein_position, '^[0-9]+(?=\\/|\\-)'),
            end = str_extract(Protein_position, '(?<=-)[0-9]+(?=/)')
            ) %>%
