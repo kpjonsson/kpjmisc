@@ -11,6 +11,7 @@
 #' @source \url{github.com/oncokb/oncokb-annotator}
 #'
 #' @import purrr
+#' @import furrr
 #' @importFrom httr modify_url GET content
 #'
 #' @name oncokb_annotate_maf
@@ -39,6 +40,9 @@ coding_mutations = c('Frame_Shift_Del',
                      'Splice_Site',
                      'Targeted_Region',
                      'Translation_Start_Site')
+
+# Allow parallellization
+plan(multiprocess)
 
 #' @export
 #' @rdname oncokb_annotate_maf
