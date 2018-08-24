@@ -47,9 +47,9 @@ plan(multiprocess)
 #' @export
 #' @rdname oncokb_annotate_maf
 query_oncokb = function(gene, protein_change, variant_type, start, end, cancer_type = 'CANCER') {
-  
+
   if (variant_type != '') {
-    
+
     base_url = 'http://oncokb.org/legacy-api/indicator.json?source=cbioportal'
     oncokb_version = content(GET(base_url))[['dataVersion']]
     tag = paste(gene, protein_change, cancer_type, sep = '-')
@@ -85,7 +85,7 @@ query_oncokb = function(gene, protein_change, variant_type, start, end, cancer_t
            oncokb_drugs = ifelse(length(drugs) == 0, '',
                                  paste(unlist(unique(drugs)), collapse = ',')),
            oncokb_version = oncokb_version)
-  } else { tibble(oncogenic = '') } 
+  } else { tibble(oncogenic = '') }
 }
 
 #' @export
@@ -112,7 +112,7 @@ oncokb_annotate_maf = function(maf, cancer_types = NULL)
            end = str_extract(Protein_position, '(?<=-)[0-9]+(?=/)')
            ) %>%
         select(gene, protein_change, variant_type, start, end, cancer_type) %>%
-        pmap_dfr(., query_oncokb)
+        future_pmap_dfr(., query_oncokb)
 
     bind_cols(maf,
               oncokb_cols)
