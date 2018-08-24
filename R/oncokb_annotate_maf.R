@@ -12,6 +12,7 @@
 #'
 #' @import purrr
 #' @import furrr
+#' @importFrom plyr revalue
 #' @importFrom httr modify_url GET content
 #'
 #' @name oncokb_annotate_maf
