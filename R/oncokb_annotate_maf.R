@@ -44,7 +44,7 @@ coding_mutations = c('Frame_Shift_Del',
                      'Translation_Start_Site')
 
 # Allow parallellization
-future::plan(multiprocess)
+future::plan(future::multiprocess)
 
 #' @export
 #' @rdname oncokb_annotate_maf
