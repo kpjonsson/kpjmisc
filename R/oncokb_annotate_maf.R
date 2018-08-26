@@ -12,6 +12,7 @@
 #'
 #' @import purrr
 #' @import furrr
+#' @importFrom future plan
 #' @importFrom plyr revalue
 #' @importFrom httr modify_url GET content
 #'
@@ -43,7 +44,7 @@ coding_mutations = c('Frame_Shift_Del',
                      'Translation_Start_Site')
 
 # Allow parallellization
-plan(multiprocess)
+future::plan(future::multiprocess)
 
 #' @export
 #' @rdname oncokb_annotate_maf
