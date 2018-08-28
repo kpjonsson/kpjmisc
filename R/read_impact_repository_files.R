@@ -29,7 +29,8 @@ read_impact_maf = function(filename = NULL, unfiltered = F, germline = F) {
 
     f = tryCatch(
         {
-            suppressWarnings(suppressMessages(fread(paste0(basedir, '/', fn))))
+            suppressWarnings(suppressMessages(fread(paste0(basedir, '/', fn)))) %>%
+                mutate(t_var_freq = t_alt_count/(t_alt_count+t_ref_count))
         },
         error = function(e) {
             stop('Cannot read file, check that cluster is mounted')
