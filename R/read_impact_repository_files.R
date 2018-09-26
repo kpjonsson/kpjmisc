@@ -44,9 +44,10 @@ read_impact_maf = function(filename = NULL, unfiltered = F, germline = F) {
                   'samples'))
 
     if (germline == T) { # by default remove germline calls
-        f
+        mutate(f, t_var_freq = t_alt_count/(t_alt_count + t_ref_count))
     } else {
-        filter(f, Mutation_Status != 'GERMLINE')
+        filter(f, Mutation_Status != 'GERMLINE') %>%
+            mutate(t_var_freq = t_alt_count/(t_alt_count + t_ref_count))
     }
 }
 
