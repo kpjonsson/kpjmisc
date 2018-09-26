@@ -36,6 +36,8 @@ read_impact_maf = function(filename = NULL, unfiltered = F, germline = F) {
             stop('Cannot read file, check that cluster is mounted')
         }
         )
+    f = filter(maf, Hugo_Symbol %nin% c('CDKN2Ap16INK4A', 'CDKN2Ap14ARF')) %>%
+        mutate(t_var_freq = t_alt_count/(t_alt_count + t_ref_count))
 
     message(paste('Reading MAF file with:\n',
                   format(nrow(f), big.mark = ',', scientific = FALSE),
@@ -44,10 +46,9 @@ read_impact_maf = function(filename = NULL, unfiltered = F, germline = F) {
                   'samples'))
 
     if (germline == T) { # by default remove germline calls
-        mutate(f, t_var_freq = t_alt_count/(t_alt_count + t_ref_count))
+        f
     } else {
-        filter(f, Mutation_Status != 'GERMLINE') %>%
-            mutate(t_var_freq = t_alt_count/(t_alt_count + t_ref_count))
+        filter(f, Mutation_Status != 'GERMLINE')
     }
 }
 
