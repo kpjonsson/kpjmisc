@@ -43,8 +43,12 @@ load_gene_annotation = function() {
 hotspot_annotate_maf = function(maf, hotspots = NULL)
 {
     if (!inherits(maf, 'data.frame')) stop('Input MAF must be a data frame, preferrable VEP annotated')
-    if (!is.null(hotspots) & !inherits(hotspots, 'data.frame')) {
-        stop('Hotspots must be a data frame with a least columns Gene and Residue')
+    if (!is.null(hotspots)) {
+        if (!file.exists(hotspots)) {
+            stop('Hotspots file does not exist')
+        } else {
+            hotspot_files = hotspots
+        }
     }
 
     if (any(grepl('hotspot', tolower(names(hotspots))))) message('Hotspot columns in MAF might be overwritten, check names')
