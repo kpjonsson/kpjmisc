@@ -53,6 +53,12 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
     gene_annotation = load_gene_annotation()
 
     if (is.null(hotspots)) {
+
+        if (!all(map_lgl(hotspot_files, file.exists))) {
+            stop(paste0('Cannot read hotspot files from:\n', paste0(hotspot_files, collapse = '\n')),
+                        call. = F)
+        }
+
         hotspots = map_dfr(hotspot_files, function(x) fread(x) %>% mutate(source = x)) %>%
             mutate(indel_hotspot = Type == 'in-frame indel',
                    indel_hotspot = ifelse(is.na(indel_hotspot), FALSE, indel_hotspot),

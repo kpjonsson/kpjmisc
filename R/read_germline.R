@@ -21,7 +21,7 @@ read_germline = function(filepath) {
                                      HGVSp %in% c('-', NA),
                                  str_extract(final_path_score,
                                              'c.[A-Za-z0-9_+>]+|Intragenic Deletion|Intragenic Duplication'),
-                                 ifelse(HGVSp %in% c('-', NA),
+                                 ifelse(HGVSp %in% c('-', '', NA),
                                         HGVSc, HGVSp)),
                final_path_score = ifelse(final_path_score == 'NO_SIGNIFICANT_GENE_GAIN_OR_LOSS', # required to wrangle some bad formatting
                                          '-', final_path_score),
