@@ -18,8 +18,6 @@
 #' @name hotspot_annotate_maf
 NULL
 
-
-
 # Source of hotspots
 hs_from_local = c('/luna/work/hotspots/24k/hotspots_24k_FULL.txt',
                   '/luna/work/hotspots/nbt/hotspots_NBT_FULL_FP_annotated.txt',
