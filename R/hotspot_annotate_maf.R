@@ -18,6 +18,8 @@
 #' @name hotspot_annotate_maf
 NULL
 
+
+
 # Source of hotspots
 hs_from_local = c('/luna/work/hotspots/24k/hotspots_24k_FULL.txt',
                   '/luna/work/hotspots/nbt/hotspots_NBT_FULL_FP_annotated.txt',
@@ -71,7 +73,7 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
                    previous_mutations = str_replace_all(Variants, ':[0-9]+\\|?', ',')) %>%
             replace_na(list(false_positive = FALSE)) %>%
             group_by(Gene, Residue, Pos, Start, End) %>%
-            summarize(indel_hotspot = any(indel_hotspot == T, na.rm = T),
+            dplyr::summarize(indel_hotspot = any(indel_hotspot == T, na.rm = T),
                       snv_hotspot = any(snv_hotspot == T, na.rm = T),
                       threeD_hotspot = any(threeD_hotspot == T, na.rm = T),
                       previous_mutations = paste(c(unique(unlist(strsplit(previous_mutations, ',')))), collapse = ','),
