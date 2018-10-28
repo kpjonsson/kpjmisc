@@ -33,6 +33,8 @@ if (Sys.info()[['nodename']] == 'lski2423') {
     hotspot_files = hs_from_cluster
     }
 
+#' @export
+#' @rdname oncokb_annotate_maf
 load_gene_annotation = function() {
     read_lines('http://oncokb.org/api/v1/genes') %>%
         fromJSON()
