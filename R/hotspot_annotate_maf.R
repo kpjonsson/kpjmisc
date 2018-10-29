@@ -68,8 +68,8 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
         hotspots = map_dfr(hotspot_files, function(x) {
             fread(x) %>%
                 mutate(source = x,
-                       Type = ifelse('Type' %in% names(.), Type, 'single residue'),
-                       Class = ifelse('Class' %in% names(.), Class, 'none'),
+                       Type = if('Type' %in% names(.)) { Type } else { 'single residue' },
+                       Class = if('Class' %in% names(.)) { Class } else { 'single residue' },
                        false_positive = ifelse('false_positive' %in% names(.), false_positive, FALSE))
         }) %>%
             mutate(indel_hotspot = Type == 'in-frame indel',
