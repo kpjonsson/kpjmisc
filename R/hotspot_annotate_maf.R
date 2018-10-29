@@ -5,7 +5,7 @@
 #' @param maf Input MAF
 #' @param hotspot Custom list of hotspots
 #'
-#' @return Annotated MAF with columns \code{snv_hotspot}, \code{threeD_hotspot}, \code{indel_hotspot_type} and \code{Hotspot} indicating types of hotspots
+#' @return Annotated MAF with columns \code{snv_hotspot}, \code{threeD_hotspot}, \code{indel_hotspot_type} and \code{Hotspot} indicating types of hotspots. Note that the \code{Hotspot} column does not includes 3D hotspots.
 #'
 #' @source \url{cancerhotspots.org}
 #' @source \url{3dhotspots.org}
@@ -19,13 +19,11 @@
 NULL
 
 # Source of hotspots
-hs_from_local = c('/luna/work/hotspots/24k/hotspots_24k_FULL.txt',
-                  '/luna/work/hotspots/nbt/hotspots_NBT_FULL_FP_annotated.txt',
-                  '/luna/work/hotspots/3d/hotspots_FP_annotated.txt')
+hs_from_local = c('/luna/work/hotspots/data/nbt-cd24k-FP-filtered-hotspots.txt',
+                  '/luna/work/hotspots/3d/hotspots.txt')
 
-hs_from_cluster = c('/ifs/work/taylorlab/jonssonp/hotspots/24k/hotspots_24k_FULL.txt',
-                    '/ifs/work/taylorlab/jonssonp/hotspots/nbt/hotspots_NBT_FULL_FP_annotated.txt',
-                    '/ifs/work/taylorlab/jonssonp/hotspots/3d/hotspots_FP_annotated.txt')
+hs_from_cluster = c('/ifs/work/taylorlab/jonssonp/hotspots/data/nbt-cd24k-FP-filtered-hotspots.txt',
+                    '/ifs/work/taylorlab/jonssonp/hotspots/3d/hotspots.txt')
 
 if (Sys.info()[['nodename']] == 'lski2423') {
     hotspot_files =  hs_from_local
@@ -70,7 +68,8 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
                 mutate(source = x,
                        Type = if('Type' %in% names(.)) { Type } else { 'single residue' },
                        Class = if('Class' %in% names(.)) { Class } else { 'single residue' },
-                       false_positive = ifelse('false_positive' %in% names(.), false_positive, FALSE))
+                       false_positive = if('false_positive' %in% names(.)) { false_positive } else { FALSE },
+                       previous_mutations = if('previous_mutations' %in% names(.)) { previous_mutations } else { str_replace_all(Variants, ':[0-9]+\\|?', ',') })
         }) %>%
             mutate(indel_hotspot = Type == 'in-frame indel',
                    indel_hotspot = ifelse(is.na(indel_hotspot), FALSE, indel_hotspot),
@@ -79,8 +78,7 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
                    Pos = ifelse(indel_hotspot == F, str_extract(Residue, '(?<=[A-Z])[0-9]+'), NA),
                    Start = ifelse(indel_hotspot == T, str_extract(Residue, '^[0-9]+(?=-)'), NA),
                    End = ifelse(indel_hotspot == T, str_extract(Residue, '(?<=-)[0-9]+$'), NA),
-                   Pos = ifelse(indel_hotspot == T & is.na(Start), Residue, Pos),
-                   previous_mutations = str_replace_all(Variants, ':[0-9]+\\|?', ',')) %>%
+                   Pos = ifelse(indel_hotspot == T & is.na(Start), Residue, Pos)) %>%
             replace_na(list(false_positive = FALSE)) %>%
             group_by(Gene, Residue, Pos, Start, End) %>%
             dplyr::summarize(indel_hotspot = any(indel_hotspot == T, na.rm = T),
@@ -181,7 +179,7 @@ hotspot_annotate_maf = function(maf, hotspots = NULL)
                                                           variant_length),
                                         'none'),
             indel_hotspot = indel_hotspot_type != 'none',
-            Hotspot = snv_hotspot == T | threeD_hotspot == T | indel_hotspot == T)
+            Hotspot = snv_hotspot == T | indel_hotspot == T)
 
     maf
 }
