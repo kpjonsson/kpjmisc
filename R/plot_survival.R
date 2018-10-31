@@ -94,7 +94,7 @@ plot_survfit = function(
 	        tidyr::fill(n.risk, n.event, n.censor, estimate) %>%
 	        group_by(strata) %>%
 	        filter(
-	            !(time == xmax & n.risk == 1 & n.event == 1 & lag(n.risk) == 1 & lag(n.event) == 1) &
+	            !( (time == xmax & n.risk == n.event) & (lag(n.risk) == lag(n.event) )) &
 	            !(time == xmax & lag(n.risk) == 1 & lag(n.censor) == 1)) %>%
 	        ungroup
 	}
