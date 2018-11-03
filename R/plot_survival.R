@@ -120,7 +120,8 @@ plot_survfit = function(
 		      panel.background = element_rect(fill = NA),
 		      plot.title = element_text(vjust = -1),
 		      aspect.ratio = 1) +
-		labs(x = x_lab, y = y_lab, color = legend_title)
+		labs(x = x_lab, y = y_lab, color = legend_title) +
+	    coord_cartesian(clip = 'off')
 
 	if (!is.null(interval)) {
 	    sf_plot = sf_plot +
