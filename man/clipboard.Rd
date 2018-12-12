@@ -2,7 +2,6 @@
 % Please edit documentation in R/clipboard.R
 \name{clipboard}
 \alias{clipboard}
-\alias{clipboard}
 \alias{pasteboard}
 \title{Use OS clipboard}
 \usage{

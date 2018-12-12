@@ -28,11 +28,19 @@ plot_stratton = function(
                        "GTGA", "GTGC", "GTGG", "GTGT", "TTGA", "TTGC", "TTGG", "TTGT")
 
     ### Complementary bases
-    nt_comp = list('G'='C', 'A'='T', 'C'='G', 'T'='A')
+    nt_comp = list(
+        'G' = 'C',
+        'A' = 'T',
+        'C' = 'G',
+        'T' = 'A'
+    )
 
     ### Load MAF if path provided
-    if (is.character(maf)) { maf = fread(maf)
-    } else { maf = tbl_df(maf) }
+    if (is.character(maf)) {
+        maf = fread(maf)
+    } else {
+        maf = tbl_df(maf)
+    }
 
     ### Process MAF
     if (is.null(sample_name)) sample_name = unique(maf$Tumor_Sample_Barcode)
@@ -54,7 +62,7 @@ plot_stratton = function(
     out_plot = ggplot(trinuc_maf, aes(TriNuc_Context, TriNuc_Frac, fill = Transition)) +
         geom_bar(stat = 'identity') +
         theme(text = element_text(family = 'ArialMT', size = 12), axis.text = element_text(color = 'black'),
-              axis.ticks.x = element_blank(), axis.text.x = element_text(angle = 90, vjust = .5, hjust = 0, size = 5),
+              axis.ticks.x = element_blank(), axis.text.x = element_text(angle = 90, vjust = .5, hjust = 1, size = 5),
               panel.background = element_blank(), legend.key = element_rect(color = 'white', size = 3),
               legend.title = element_blank(), legend.key.size = unit(.75, 'lines'), panel.grid = element_blank(),
               strip.background = element_blank(), strip.text = element_text(size = 10),
