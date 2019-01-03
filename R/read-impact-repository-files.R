@@ -14,7 +14,7 @@
 #' @name read_impact_repository_files
 NULL
 
-basedir = '/ifs/res/taylorlab/jonssonp/dmp/mskimpact'
+basedir = '/ifs/res/taylorlab/jonssonp/dmp/mixedpact'
 
 #' @export
 #' @rdname read_impact_repository_files
@@ -36,7 +36,9 @@ read_impact_maf = function(filename = NULL, unfiltered = F, germline = F) {
             stop('Cannot read file, check that cluster is mounted')
         }
         )
-    f = filter(f, Hugo_Symbol %nin% c('CDKN2Ap16INK4A', 'CDKN2Ap14ARF')) %>%
+    f = filter(f,
+               Tumor_Sample_Barcode %like% 'IM[0-9]$',
+               Hugo_Symbol %nin% c('CDKN2Ap16INK4A', 'CDKN2Ap14ARF')) %>%
         mutate(t_var_freq = t_alt_count/(t_alt_count + t_ref_count))
 
     message(paste('Reading MAF file with:\n',
@@ -71,7 +73,8 @@ read_impact_cna = function(filename = NULL) {
         }
     )
 
-    f = gather(f, sample_id, cna, -Hugo_Symbol)
+    f = gather(f, sample_id, cna, -Hugo_Symbol) %>%
+        filter(sample_id %like% 'IM[0-9]$')
 
     message(paste('Reading CNA file with:\n',
                   format(length(unique(f$sample_id)), big.mark = ',', scientific = FALSE),
@@ -101,7 +104,8 @@ read_impact_fusions = function(filename = NULL) {
 
     f = select(f, Tumor_Sample_Barcode, Hugo_Symbol, everything()) %>%
         rename_at(vars(-matches('Tumor_Sample_Barcode|Hugo_Symbol')), funs(str_to_lower(.))) %>%
-        select(-center, -method, -entrez_gene_id)
+        select(-center, -method, -entrez_gene_id) %>%
+        filter(tumor_sample_barcode %like% 'IM[0-9]$')
 
     message(paste('Reading fusion file with:\n',
                   format(length(unique(f$Tumor_Sample_Barcode)), big.mark = ',', scientific = FALSE),
@@ -128,7 +132,8 @@ read_impact_samples = function(filename = NULL) {
             stop('Cannot read file, check that cluster is mounted')
         }
     )
-    f = clean_names(f)
+    f = clean_names(f) %>%
+        filter(sample_id %like% 'IM[0-9]$')
     message(paste('Reading clinical file with:\n',
                   format(length(unique(f$sample_id)), big.mark = ',', scientific = FALSE),
                   'samples'))
