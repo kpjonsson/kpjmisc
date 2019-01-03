@@ -9,10 +9,6 @@
 #'
 #' @return Object containing expected VAFs if the tumor is on the major (\code{mcn}) or minor allele (\code{lcn}), respectively.
 #'
-#' @importFrom tidyr replace_na
-#' @importFrom jsonlite fromJSON
-#' @importFrom readr read_lines
-#'
 
 #' @export
 #' @rdname export_vaf
