@@ -97,6 +97,8 @@ oncokb_annotate_maf = function(maf, cancer_types = NULL)
     if (is.null(cancer_types) & 'cancer_type' %nin% names(maf)) {
         message('No cancer types(s) specified, defaults to CANCER')
         maf$cancer_type = 'CANCER'
+    } else if (is.character(cancer_types)) {
+        maf = add_column(maf, cancer_type = cancer_types)
     } else {
         maf = left_join(maf, cancer_types, by = 'Tumor_Sample_Barcode')
     }
