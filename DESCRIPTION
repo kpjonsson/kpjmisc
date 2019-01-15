@@ -1,10 +1,14 @@
 Package: kpjmisc
 Title: Miscellanous Functions
-Version: 0.0.3.0
-Authors@R: person("Philip", "Jonsson", , "philip.jonsson@gmail.com", role = c("aut", "cre"))
-Description: Functions facilitating everyday work
+Version: 1.0
+Authors@R:
+    person("Philip",
+           "Jonsson",
+           "philip.jonsson@gmail.com",
+           role = c("aut", "cre"))
+Description: Functions facilitating everyday work.
 Depends: R (>= 3.2.0)
-License: Not sure yet
+License: MIT
 LazyData: true
 RoxygenNote: 6.1.1
 Imports:
