@@ -1,17 +1,16 @@
 #' Estimate somatic variant allele fraction (VAF)
 #'
-#' @description
 #' Given copy-number and purity estimates, calculates the two expected alllele fractions of a mutation in a tumor.
 #' Use \code{expected_vaf_germline} for germline mutations and \code{expected_vaf_somatic} for somatic mutations
 #'
-#' @param maf Input MAF
-#' @param hotspot Custom list of hotspots
+#' @param purity Sample purity.
+#' @param mcn Integer copy-number of major allele.
+#' @param lcn Integer copy-number of minor (lesser) allele.
 #'
 #' @return Object containing expected VAFs if the tumor is on the major (\code{mcn}) or minor allele (\code{lcn}), respectively.
-#'
 
 #' @export
-#' @rdname export_vaf
+#' @rdname expected_vaf
 expected_vaf_germline = function(purity, mcn, lcn) {
 
     tcn = mcn + lcn # total number of alleles in tumor
@@ -24,7 +23,7 @@ expected_vaf_germline = function(purity, mcn, lcn) {
 }
 
 #' @export
-#' @rdname export_vaf
+#' @rdname expected_vaf
 expected_vaf_somatic = function(purity, mcn, lcn) {
 
     tcn = mcn + lcn # total number of alleles in tumor

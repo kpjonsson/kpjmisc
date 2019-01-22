@@ -4,7 +4,7 @@
 #'
 #' Palette \code{arsenal_colors} contains 3 distinct colors
 #'
-#' @param n number of colors to return
+#' @param n number of colors to return.
 #'
 #' @return A vector colors the length of \code{n}
 
