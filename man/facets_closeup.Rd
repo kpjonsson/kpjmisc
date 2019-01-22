@@ -25,5 +25,5 @@ If \code{plot == T} plots cnlr, valor and icnem objects else returns all as obje
 Generate gene-level Facets plot
 }
 \examples{
-facets_closeup('path_to_sample.Rdata', 'BRCA1', 17)
+\donttest{facets_closeup('path_to_sample.Rdata', 'BRCA1', 17)}
 }

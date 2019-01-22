@@ -9,7 +9,7 @@
 colorspace64
 }
 \arguments{
-\item{n}{number of colors to return}
+\item{n}{number of colors to return.}
 }
 \value{
 A vector colors the length of \code{n}

@@ -4,11 +4,14 @@
 \alias{dnames}
 \title{Custom color palettes}
 \usage{
-dnames(char_vec)
+dnames(name_vector)
+}
+\arguments{
+\item{name_vector}{Vector of name.}
 }
 \value{
-The duplicated values
+The duplicated values in \code{name_vector}.
 }
 \description{
-Works like \code{duplicated} but returns the actual values
+Works like \code{duplicated} but returns the actual values.
 }

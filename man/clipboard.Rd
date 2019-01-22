@@ -10,7 +10,7 @@ clipboard(x, delim = ",")
 pasteboard(delim = "\\t", header = T)
 }
 \arguments{
-\item{x}{Input object, can be piped through \code{margrittr} pipe}
+\item{x}{Input object, can be piped through \code{margrittr} pipe.}
 
 \item{delim}{What is the delimiter of pasted object?}
 

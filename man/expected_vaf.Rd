@@ -10,9 +10,11 @@ expected_vaf_germline(purity, mcn, lcn)
 expected_vaf_somatic(purity, mcn, lcn)
 }
 \arguments{
-\item{maf}{Input MAF}
+\item{purity}{Sample purity.}
 
-\item{hotspot}{Custom list of hotspots}
+\item{mcn}{Integer copy-number of major allele.}
+
+\item{lcn}{Integer copy-number of minor (lesser) allele.}
 }
 \value{
 Object containing expected VAFs if the tumor is on the major (\code{mcn}) or minor allele (\code{lcn}), respectively.
