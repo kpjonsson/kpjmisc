@@ -71,7 +71,9 @@ read_impact_cna = function(filename = NULL) {
         }
     )
 
-    f = gather(f, sample_id, cna, -Hugo_Symbol)
+    f = gather(f, sample_id, cna, -Hugo_Symbol) %>%
+        mutate(Hugo_Symbol = ifelse(Hugo_Symbol %like% '(^CDKN2A|^CDKN2B)', 'CDKN2A/B', Hugo_Symbol)) %>%
+        distinct(sample_id, Hugo_Symbol, .keep_all = T)
 
     message(paste('Reading CNA file with:\n',
                   format(length(unique(f$sample_id)), big.mark = ',', scientific = FALSE),
