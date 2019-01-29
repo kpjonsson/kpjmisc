@@ -5,7 +5,7 @@
 #
 #' @return None
 #'
-#' @importFrom ggplot2 theme_set theme theme_bw ggplot
+#' @import ggplot2
 #'
 #' @examples
 #' library(ggplot2)
