@@ -1,6 +1,6 @@
 Package: kpjmisc
 Title: Miscellanous Functions
-Version: 1.0
+Version: 1.1
 Authors@R:
     person(given = "Philip",
            family = "Jonsson",
@@ -27,6 +27,11 @@ Imports:
     purrr,
     readr,
     readxl,
-    tidyr
+    tidyr,
+    egg,
+    stringr,
+    scales,
+    reshape2
 Suggests: 
-    testthat
+    testthat,
+    covr

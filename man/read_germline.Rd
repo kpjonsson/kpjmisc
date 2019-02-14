@@ -7,7 +7,7 @@
 read_germline(filepath)
 }
 \arguments{
-\item{path}{Excel file}
+\item{filepath}{Excel file}
 }
 \value{
 Data frame

@@ -3,6 +3,8 @@
 #' Basic function to set \code{ggplot2} theme, also setting default fonts for all text objects
 #'
 #' @param user_theme Name of theme
+#'
+#' @importFrom ggplot2 scale_color_manual scale_fill_manual update_geom_defaults theme_set
 
 #' @export
 set_theme = function(user_theme) {
@@ -29,7 +31,7 @@ set_theme = function(user_theme) {
 
     # Change default colors
     assign('scale_colour_discrete', function(..., values = my_pal)
-        scale_colour_manual(..., values = values), globalenv())
+        scale_color_manual(..., values = values), globalenv())
     assign('scale_fill_discrete', function(..., values = my_pal)
         scale_fill_manual(..., values = values), globalenv())
     assign('scale_colour_gradient', function(..., low = '#C8E370', high = '#de6757')

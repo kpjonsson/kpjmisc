@@ -6,6 +6,10 @@
 #'
 #' @return Melted data frame with trivial names of signatures
 #'
+#' @importFrom reshape2 melt
+#' @importFrom dplyr select mutate
+#' @importFrom data.table fread
+#'
 #' @source \url{cancer.sanger.ac.uk/cosmic/signatures}
 #' @name read_signatures
 NULL
@@ -72,7 +76,7 @@ custom_order = c('Age',
 #' @rdname read_signatures
 read_signatures = function(input_file) {
 
-    sign = fread(input_file) %>%
+    sign = suppressMessages(fread(input_file)) %>%
         melt(id.vars = c('Sample Name', 'Number of Mutations')) %>%
         dplyr::mutate(variable = str_replace(variable, 'Signature.', ''),
                variable_name = plyr::mapvalues(variable, seq(1,30), signatures_map)) %>%

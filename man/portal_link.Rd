@@ -10,7 +10,7 @@
 portal_link(samples)
 }
 \arguments{
-\item{sample}{Vector of one or more samples to look up}
+\item{samples}{Vector of one or more samples to look up.}
 }
 \value{
 URL to sample(s) at cBioPortal

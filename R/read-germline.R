@@ -2,12 +2,15 @@
 #'
 #' Properly parse fields in DMP's germline distributed files
 #'
-#' @param path Excel file
+#' @param filepath Excel file
 #'
 #' @return Data frame
 #'
 #' @importFrom readxl read_excel
 #' @importFrom janitor clean_names get_dupes
+#' @importFrom stringr str_extract str_sub
+#' @importFrom dplyr filter group_by mutate ungroup select distinct
+#' @importFrom janitor clean_names
 
 #' @export
 read_germline = function(filepath) {

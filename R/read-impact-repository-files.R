@@ -14,7 +14,7 @@
 #' @name read_impact_repository_files
 NULL
 
-basedir = '/ifs/res/taylorlab/jonssonp/dmp/mskimpact'
+basedir = '/ifs/res/taylorlab/dmp/mskimpact'
 
 #' @export
 #' @rdname read_impact_repository_files

@@ -2,7 +2,7 @@
 #'
 #' Creates URL based on listed samples to instance of MSK-IMPACT samples
 #'
-#' @param sample Vector of one or more samples to look up
+#' @param samples Vector of one or more samples to look up.
 #'
 #' @return URL to sample(s) at cBioPortal
 #'

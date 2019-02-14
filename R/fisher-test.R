@@ -2,7 +2,10 @@
 #'
 #' Wraps \code{fisher.test} and tidies the output with \code{broom}
 #'
-#' @param a,a_total,b,b_total Test groups A and B
+#' @param a_positive Upper left quadrant.
+#' @param a_negative Upper right quadrant.
+#' @param b_positive Lower left quadrant.
+#' @param b_negative Lower right quadrant.
 #' @param alternative \code{two.sided} \code{greater} or \code{less}
 #'
 #' @return Test statistics

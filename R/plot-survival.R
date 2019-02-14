@@ -22,6 +22,7 @@
 #' @importFrom broom tidy
 #' @importFrom plyr mapvalues
 #' @importFrom RColorBrewer brewer.pal
+#' @importFrom scales pretty_breaks
 #'
 #' @name plot_survival
 NULL

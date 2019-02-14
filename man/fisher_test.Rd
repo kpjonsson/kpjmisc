@@ -8,9 +8,15 @@ fisher_test(a_positive, a_negative, b_positive, b_negative,
   alternative = "two.sided", conf_level = 0.95)
 }
 \arguments{
-\item{alternative}{\code{two.sided} \code{greater} or \code{less}}
+\item{a_positive}{Upper left quadrant.}
 
-\item{a, a_total, b, b_total}{Test groups A and B}
+\item{a_negative}{Upper right quadrant.}
+
+\item{b_positive}{Lower left quadrant.}
+
+\item{b_negative}{Lower right quadrant.}
+
+\item{alternative}{\code{two.sided} \code{greater} or \code{less}}
 }
 \value{
 Test statistics
