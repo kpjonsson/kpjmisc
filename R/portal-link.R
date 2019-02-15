@@ -15,7 +15,7 @@ portal_link = function(samples) {
     samples = unique(str_sub(samples, 1, 9)) # truncate to patient ID
 
     if (length(samples) > 1) {
-        query_string = paste0('&caseId=', samples[1], '#navCaseIds=', paste0(samples[-1], collapse = ','))
+        query_string = paste0('&caseId=', samples[1], '#navCaseIds=', paste0('mskimpact:', samples[-1], collapse = ','))
     } else {
         query_string = paste0('&caseId=', samples[1])
     }
