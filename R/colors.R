@@ -7,13 +7,17 @@
 #' @source \url{http://godsnotwheregodsnot.blogspot.ru/2012/09/color-distribution-methodology.html}
 #'
 #' @return A vector colors the length of \code{n}
+#' @name colors
+NULL
 
 #' @export
+#' @rdname colors
 many_colors = function(n) {
     as.character(colorspace64[1:n])
 }
 
 #' @export
+#' @rdname colors
 arsenal_colors = function(n) {
     if (n > 3) stop('Only three colors in palette.')
     c('#EF0107','#023474','#9C824A')[1:n]

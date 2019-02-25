@@ -6,15 +6,19 @@
 #' @param a_negative Upper right quadrant.
 #' @param b_positive Lower left quadrant.
 #' @param b_negative Lower right quadrant.
+#' @param conf_level Level of confidence, if returning CIs.
 #' @param alternative \code{two.sided} \code{greater} or \code{less}
+#'
 #'
 #' @return Test statistics
 #'
 #' @importFrom broom tidy
 
 #' @export
-fisher_test = function(a_positive, a_negative,
-                       b_positive, b_negative,
+fisher_test = function(a_positive,
+                       a_negative,
+                       b_positive,
+                       b_negative,
                        alternative = 'two.sided',
                        conf_level = 0.95) {
 

@@ -4,7 +4,7 @@
 
 #' Truncating mutations
 #' @format Vector of "Variant_Classification" entries in a MAF file that qualify as protein-truncating mutations.
-'coding_mutations'
+'truncating_mutations'
 
 #' IMPACT genes
 #' @format `data.table` with gene names and symbols for genes on different version of the MSK-IMPACT panel.

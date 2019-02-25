@@ -7,12 +7,8 @@
 \format{Vector of "Variant_Classification" entries in a MAF file that qualify as coding mutations.}
 \usage{
 coding_mutations
-
-coding_mutations
 }
 \description{
 Coding  mutations
-
-Truncating mutations
 }
 \keyword{datasets}

@@ -17,6 +17,8 @@ fisher_test(a_positive, a_negative, b_positive, b_negative,
 \item{b_negative}{Lower right quadrant.}
 
 \item{alternative}{\code{two.sided} \code{greater} or \code{less}}
+
+\item{conf_level}{Level of confidence, if returning CIs.}
 }
 \value{
 Test statistics
