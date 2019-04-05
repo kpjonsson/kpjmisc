@@ -42,7 +42,7 @@ facets_closeup = function(path,
                        gene.name = gene,
                        chrom.range = chrom_range,
                        subset.snps = F,
-                       bed.path = '/luna/git/facets-suite/Homo_sapiens.GRCh37.75.canonical_exons.bed',
+                       bed.path = '/luna/git/facets-suite/data/Homo_sapiens.GRCh37.75.canonical_exons.bed',
                        col.1 = '#6baed6', col.2 = '#969696')
 
     if (plot) {
