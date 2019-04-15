@@ -74,7 +74,7 @@ query_oncokb = function(gene, cna_type, cancer_type = 'CANCER') {
 #' @rdname oncokb_annotate_cna
 oncokb_annotate_cna = function(cnas, cancer_types = NULL)
 {
-    if (is.null(cancer_types) & !'cancer_type' %in% names(maf)) {
+    if (is.null(cancer_types) & !'cancer_type' %in% names(cnas)) {
         message('No cancer types(s) specified, defaults to CANCER')
         cnas$cancer_type = 'CANCER'
     } else if (is.character(cancer_types)) {
