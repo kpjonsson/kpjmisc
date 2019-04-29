@@ -4,7 +4,7 @@
 \alias{plot_stratton}
 \title{Stratton plot}
 \usage{
-plot_stratton(maf, sample_name = NULL)
+plot_stratton(maf, sample_name = NULL, return_object = FALSE)
 }
 \arguments{
 \item{maf}{Input MAF}

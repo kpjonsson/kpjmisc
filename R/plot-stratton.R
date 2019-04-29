@@ -10,7 +10,8 @@
 #' @export
 plot_stratton = function(
     maf,
-    sample_name = NULL # any number of samples, if none given all will be plotted
+    sample_name = NULL, # any number of samples, if none given all will be plotted
+    return_object = FALSE
     )
 {
     ## Trinucleotide context, middle two nucleotides represent Ref->Alt
@@ -78,5 +79,9 @@ plot_stratton = function(
     if (length(sample_name) > 1) out_plot = out_plot + facet_wrap(~Tumor_Sample_Barcode, drop = T)
 
     ### Print
-    print(out_plot)
+    if (return_object) {
+        out_plot
+    } else {
+        print(out_plot)
+    }
 }
