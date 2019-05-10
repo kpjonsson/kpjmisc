@@ -36,8 +36,13 @@ read_impact_maf = function(filename = NULL, unfiltered = F, germline = F) {
             stop('Cannot read file, check that cluster is mounted')
         }
         )
-    f = filter(f, Hugo_Symbol %nin% c('CDKN2Ap16INK4A', 'CDKN2Ap14ARF')) %>%
-        mutate(t_var_freq = t_alt_count/(t_alt_count + t_ref_count))
+    f = mutate(f,
+               t_var_freq = t_alt_count/(t_alt_count + t_ref_count)) %>%
+        group_by(Tumor_Sample_Barcode) %>%
+        mutate(remove = any(Hugo_Symbol == 'CDKN2A') & Hugo_Symbol %in% c('CDKN2Ap16INK4A', 'CDKN2Ap14ARF')) %>% # get rid of duplicate CDKN2A mutations
+        ungroup() %>%
+        filter(remove != TRUE) %>%
+        mutate(Hugo_Symbol = ifelse(Hugo_Symbol %in% c('CDKN2Ap16INK4A', 'CDKN2Ap14ARF'), 'CDKN2A', Hugo_Symbol))
 
     message(paste('Reading MAF file with:\n',
                   format(nrow(f), big.mark = ',', scientific = FALSE),
