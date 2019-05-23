@@ -18,10 +18,17 @@ facets_closeup = function(path,
                           gene,
                           chrom_range = NULL,
                           plot = T,
-                          adjust_dlr = F) {
+                          adjust_dlr = F,
+                          subset_snps = F) {
+
+    if (Sys.info()['nodename'] %like% 'selene|luna|juno') {
+        basedir = '/home/jonssonp/git/facets-suite/'
+    } else {
+        basedir = '~/luna/git/facets-suite/'
+    }
 
     ### Source function?
-    if (!exists('close.up')) source('/luna/git/facets-suite/fPlots_ggplot2.R')
+    if (!exists('close.up')) source(paste0(basedir, 'fPlots_ggplot2.R'))
 
     ### Load Rdata object
     load(path)
@@ -41,8 +48,8 @@ facets_closeup = function(path,
     gene_cu = close.up(out, fit,
                        gene.name = gene,
                        chrom.range = chrom_range,
-                       subset.snps = F,
-                       bed.path = '/luna/git/facets-suite/data/Homo_sapiens.GRCh37.75.canonical_exons.bed',
+                       subset.snps = subset_snps,
+                       bed.path = paste0(basedir, 'data/Homo_sapiens.GRCh37.75.canonical_exons.bed')
                        col.1 = '#6baed6', col.2 = '#969696')
 
     if (plot) {
