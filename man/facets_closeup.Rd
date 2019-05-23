@@ -5,7 +5,7 @@
 \title{Generate gene-level Facets plot}
 \usage{
 facets_closeup(path, gene, chrom_range = NULL, plot = T,
-  adjust_dlr = F)
+  adjust_dlr = F, subset_snps = F)
 }
 \arguments{
 \item{path}{Path to Rdata oject}
@@ -17,6 +17,8 @@ facets_closeup(path, gene, chrom_range = NULL, plot = T,
 \item{plot}{Plot or save as object}
 
 \item{adjust_dlr}{Set dipLogR to 0, essentially normalizing the log ratio}
+
+\item{subset_snps}{Subset the SNPs, for easier plotting. Boolean or numeric.}
 }
 \value{
 If \code{plot == T} plots cnlr, valor and icnem objects else returns all as objects
