@@ -42,7 +42,8 @@ read_impact_maf = function(filename = NULL, unfiltered = F, germline = F) {
         mutate(remove = any(Hugo_Symbol == 'CDKN2A') & Hugo_Symbol %in% c('CDKN2Ap16INK4A', 'CDKN2Ap14ARF')) %>% # get rid of duplicate CDKN2A mutations
         ungroup() %>%
         filter(remove != TRUE) %>%
-        mutate(Hugo_Symbol = ifelse(Hugo_Symbol %in% c('CDKN2Ap16INK4A', 'CDKN2Ap14ARF'), 'CDKN2A', Hugo_Symbol))
+        mutate(Hugo_Symbol = ifelse(Hugo_Symbol %in% c('CDKN2Ap16INK4A', 'CDKN2Ap14ARF'), 'CDKN2A', Hugo_Symbol)) %>%
+        distinct(Tumor_Sample_Barcode, Chromosome, Start_Position, End_Position, Reference_Allele, Tumor_Seq_Allele2, .keep_all = T) # there are some duplicates
 
     message(paste('Reading MAF file with:\n',
                   format(nrow(f), big.mark = ',', scientific = FALSE),
