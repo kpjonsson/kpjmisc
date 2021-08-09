@@ -4,8 +4,13 @@
 \alias{signature_barplot}
 \title{Signature barplot}
 \usage{
-signature_barplot(sign, col_vec = NULL, sample_order = NULL,
-  sign_order = NULL, labels = TRUE)
+signature_barplot(
+  sign,
+  col_vec = NULL,
+  sample_order = NULL,
+  sign_order = NULL,
+  labels = TRUE
+)
 }
 \arguments{
 \item{sign}{Signature data, as from \code{read_signatures}}

@@ -4,7 +4,19 @@
 \name{impact_genes}
 \alias{impact_genes}
 \title{IMPACT genes}
-\format{`data.table` with gene names and symbols for genes on different version of the MSK-IMPACT panel.}
+\format{
+`data.table` with gene names and symbols for genes on different version of the MSK-IMPACT panel.
+
+A data frame with 468 rows and 5 variables:
+\describe{
+  \item{Approved.Symbol}{Gene symbol, some deprecated}
+  \item{Approved.Name}{Full gene name}
+  \item{Num.Distinct.Exons}{Exons targeted}
+  \item{First.Design}{First panel version with gene}
+  \item{Gene.Symbol}{Official gene symbol, use this}
+  ...
+}
+}
 \source{
 \url{https://cmo.mskcc.org/cmo/resources/gene-lists/}
 

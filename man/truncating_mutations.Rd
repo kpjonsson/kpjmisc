@@ -4,7 +4,9 @@
 \name{truncating_mutations}
 \alias{truncating_mutations}
 \title{Truncating mutations}
-\format{Vector of "Variant_Classification" entries in a MAF file that qualify as protein-truncating mutations.}
+\format{
+Vector of "Variant_Classification" entries in a MAF file that qualify as protein-truncating mutations.
+}
 \usage{
 truncating_mutations
 }

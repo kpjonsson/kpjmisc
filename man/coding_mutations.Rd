@@ -4,7 +4,9 @@
 \name{coding_mutations}
 \alias{coding_mutations}
 \title{Coding  mutations}
-\format{Vector of "Variant_Classification" entries in a MAF file that qualify as coding mutations.}
+\format{
+Vector of "Variant_Classification" entries in a MAF file that qualify as coding mutations.
+}
 \usage{
 coding_mutations
 }

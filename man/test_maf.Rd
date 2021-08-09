@@ -4,7 +4,11 @@
 \name{test_maf}
 \alias{test_maf}
 \title{Test MAF}
-\format{Mutation annotation format (MAF) with standard columns.}
+\format{
+Mutation annotation format (MAF) with standard columns.
+
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 13 rows and 47 columns.
+}
 \source{
 \url{portal.gdc.cancer.gov}
 

@@ -4,8 +4,14 @@
 \alias{fisher_test}
 \title{Fisher's test}
 \usage{
-fisher_test(a_positive, a_negative, b_positive, b_negative,
-  alternative = "two.sided", conf_level = 0.95)
+fisher_test(
+  a_positive,
+  a_negative,
+  b_positive,
+  b_negative,
+  alternative = "two.sided",
+  conf_level = 0.95
+)
 }
 \arguments{
 \item{a_positive}{Upper left quadrant.}

@@ -4,8 +4,14 @@
 \alias{facets_closeup}
 \title{Generate gene-level Facets plot}
 \usage{
-facets_closeup(path, gene, chrom_range = NULL, plot = T,
-  adjust_dlr = F, subset_snps = F)
+facets_closeup(
+  path,
+  gene,
+  chrom_range = NULL,
+  plot = T,
+  adjust_dlr = F,
+  subset_snps = F
+)
 }
 \arguments{
 \item{path}{Path to Rdata oject}

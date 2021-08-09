@@ -25,7 +25,7 @@
 NULL
 
 # Allow parallellization
-future::plan(future::multiprocess)
+future::plan(future::multicore)
 
 query_oncokb = function(gene, cna_type, cancer_type = 'CANCER') {
 

@@ -3,7 +3,6 @@
 \docType{package}
 \name{kpjmisc}
 \alias{kpjmisc}
-\alias{kpjmisc-package}
 \title{\code{kpjmisc} package}
 \description{
 Philip's utility functions.

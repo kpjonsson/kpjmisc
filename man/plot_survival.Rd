@@ -8,11 +8,22 @@
 \usage{
 parse_survfit(survfit_object)
 
-plot_survfit(survfit_object, colors = NULL, legend_title = NULL,
-  plot_title = NULL, xmax = NULL, parse_strata = FALSE,
-  x_lab = NULL, y_lab = NULL, legend_pos = NULL, pval = TRUE,
-  pval_pos = NULL, interval = NULL, env_theme = TRUE,
-  table = FALSE)
+plot_survfit(
+  survfit_object,
+  colors = NULL,
+  legend_title = NULL,
+  plot_title = NULL,
+  xmax = NULL,
+  parse_strata = FALSE,
+  x_lab = NULL,
+  y_lab = NULL,
+  legend_pos = NULL,
+  pval = TRUE,
+  pval_pos = NULL,
+  interval = NULL,
+  env_theme = TRUE,
+  table = FALSE
+)
 }
 \arguments{
 \item{survfit_object}{Input \code{survfit} object}

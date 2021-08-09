@@ -6,7 +6,11 @@
 \alias{theme_bwmin}
 \alias{theme_pub}
 \title{\code{ggplot2} themes}
-\format{An object of class \code{theme} (inherits from \code{gg}) of length 62.}
+\format{
+An object of class \code{theme} (inherits from \code{gg}) of length 93.
+
+An object of class \code{theme} (inherits from \code{gg}) of length 93.
+}
 \usage{
 theme_bwmin
 

@@ -5,7 +5,9 @@
 \alias{read_signatures}
 \alias{signatures_map}
 \title{Mutational signatures}
-\format{An object of class \code{character} of length 30.}
+\format{
+An object of class \code{character} of length 30.
+}
 \source{
 \url{cancer.sanger.ac.uk/cosmic/signatures}
 }

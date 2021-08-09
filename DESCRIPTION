@@ -1,6 +1,6 @@
 Package: kpjmisc
 Title: Miscellanous Functions
-Version: 1.2
+Version: 2.0
 Authors@R:
     person(given = "Philip",
            family = "Jonsson",
@@ -11,7 +11,7 @@ Depends: R (>= 3.2.0)
 License: MIT + file LICENSE
 LazyData: true
 Encoding: UTF-8
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Imports:
     plyr,
     dplyr,
